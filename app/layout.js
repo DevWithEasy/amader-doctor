@@ -1,6 +1,6 @@
-import Header from "@/app/_components/header/Header";
-import "./globals.css";
-import { Providers } from "./providers";
+import Header from "@/app/_components/header/Header"
+import "./globals.css"
+import { Providers } from "./providers"
 
 export const metadata = {
   title: "Amader Doctor - Doctor Appoinment Solution",

@@ -1,17 +1,29 @@
-export function selectedDay(selected,doctor,setChamber,toast){
-    if(new Date(selected).getTime() < Date.now()){
-        return toast.error('আপনি আজকের থেকে পরবর্তী তারিখ বাছাই করুন')
+export function selectedDay(e, value, setValue, chambers, setChamber, toast) {
+    if (new Date(e.target.value).getTime() < Date.now()) {
+        return toast({
+            title: 'সঠিক তারিখ নির্বাচনে ব্যর্থ',
+            description: "আপনি আজকের থেকে পরবর্তী তারিখ বাছাই করুন",
+            status: 'error',
+            duration: 2000,
+            isClosable: true,
+        })
     }
-    const date = new Date(selected);
+    const date = new Date(e.target.value);
     const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const dayName = daysOfWeek[date.getDay()];
-    const days = doctor?.chambers.map(chamber=> chamber.day)
-    const day = days.find(day => day === dayName)
-    const chamber = doctor?.chambers.find(chamber=>chamber.day === day)
-    if(day === undefined){
+    const days = chambers?.map(chamber => chamber.day)
+    const day = days?.find(day => day === dayName)
+    const chamber = chambers?.find(chamber => chamber.day === day)
+    if (day === undefined) {
         setChamber({})
-        toast.error(`চেম্বার লিস্টে যে বার গুলো দেওয়া আছে,সেই বার অনুযায়ী তারিখ বাছাই করে আপনার অ্যাপয়েন্টম্যান্ট নিশ্চিত করুন`)
-    }else{
-        setChamber({...chamber,date : date.toLocaleDateString()}) 
+        return toast({
+            title: 'সঠিক তারিখ নির্বাচনে ব্যর্থ !',
+            description: "চেম্বার লিস্টে যে বার গুলো দেওয়া আছে,সেই বার অনুযায়ী তারিখ বাছাই করে আপনার অ্যাপয়েন্টম্যান্ট নিশ্চিত করুন",
+            status: 'error',
+            duration: 2000,
+            isClosable: true,
+        })
+    } else {
+        setChamber({ ...chamber, date: date.toLocaleDateString() })
     }
 }

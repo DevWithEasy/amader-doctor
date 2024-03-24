@@ -5,7 +5,7 @@ import UserMenu from "./UserMenu";
 
 const Header = () => {
     return (
-        <div className="h-[60px] p-2 flex justify-between items-center bg-blue-500 font-bangla">
+        <div className="h-[60px] p-2 mb-3 flex justify-between items-center bg-blue-500 font-bangla">
             <div className="w-6/12 md:w-3/12 text-white">
                 <Link href="/" className="flex items-center space-x-3">
                     <span className="text-xl font-bold">আমাদের ডাক্তার</span>
