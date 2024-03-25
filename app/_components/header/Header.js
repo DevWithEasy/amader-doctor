@@ -37,6 +37,12 @@ const Header = () => {
                 >
                     ব্লাড ব্যাংক
                 </Link>
+                <Link
+                    href="/maps"
+                    className="px-4 py-2 hover:bg-white hover:text-blue-500 trasition-all duration-300 rounded"
+                >
+                    ম্যাপ
+                </Link>
                 <IsUser />
             </div>
             <div

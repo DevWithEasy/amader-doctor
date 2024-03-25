@@ -26,13 +26,6 @@ export default function AppointmentForm({ doctor }) {
     return (
         <div>
             <div className='w-full bg-white rounded-md'>
-                {/* <DayPicker
-                    mode="single"
-                    selected={selected}
-                    onSelect={setSelected}
-                    className='border rounded-md'
-                /> */}
-
                 <div
                 className='p-2 space-y-2'
                 >

@@ -4,7 +4,7 @@ import Doctor from "./Doctor";
 export default function DoctorList({ doctors }) {
     return (
         <div
-            className="md:w-10/12 md:mx-auto mx-4 space-y-3"
+            className="space-y-3"
         >
             <h2
                 className="text-xl font-semibold"

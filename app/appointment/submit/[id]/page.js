@@ -13,14 +13,14 @@ async function getData(id) {
 }
 
 export default async function AppointmentSubmit({ params }) {
-  // const { data } = await getData(params.id)
+  const { data } = await getData(params.id)
 
   return (
     <main>
       <div
         className="flex justify-between"
       >
-      {/* <div className='w-1/2'>
+      <div className='w-1/2'>
         <div className='flex space-x-4 p-2 pt-2 bg-white rounded'>
           <Image
             src={`${api_url}/${data?.user?.image?.url}`}
@@ -37,7 +37,7 @@ export default async function AppointmentSubmit({ params }) {
           </div>
         </div>
         {data?.chambers && <AppoinmentChamberList chambers={data.chambers} />}
-      </div> */}
+      </div>
       <div
         className="w-1/2"
       >
