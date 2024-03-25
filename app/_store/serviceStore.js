@@ -2,35 +2,43 @@ import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
 const serviceStore = (set) => ({
-    hospitals : [],
-    specialists : [],
-    doctors : [],
-    users : [],
-    process : false,
+    hospitals: [],
+    specialists: [],
+    doctors: [],
+    users: [],
+    process: false,
 
     addUsers: (data) => {
         set((state) => ({
-            users : data
+            users: data
         }))
     },
     addDoctors: (data) => {
         set((state) => ({
-            doctors : data
+            doctors: data
         }))
     },
     addHospitals: (data) => {
         set((state) => ({
-            hospitals : data
+            hospitals: data
         }))
     },
     addSpecialists: (data) => {
         set((state) => ({
-            specialists : data
+            specialists: data
         }))
     },
     processing: (value) => {
         set((state) => ({
-            process : value
+            process: value
+        }))
+    },
+    removeData: (value) => {
+        set((state) => ({
+            hospitals: [],
+            specialists: [],
+            doctors: [],
+            users: [],
         }))
     },
 })

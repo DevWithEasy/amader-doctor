@@ -1,44 +1,62 @@
 import axios from "axios"
-import api_url from "./apiUrl"
+import api_url from "./apiurl"
 
-export async function handleSignUp(value, navigate, toast) {
+export async function handleSignUp(value, router, toast) {
     try {
         const res = await axios.post(`${api_url}/api/auth/signup`, value)
         toast.success('আপনার একাউন্টটি সফল ভাবে তৈরি হয়েছে')
         localStorage.setItem('accessToken', res.data.token)
-        navigate('/verify')
+        router.push('/verify')
     } catch (error) {
         console.log(error)
         toast.error('আপনার একাউন্ট তৈরিতে ব্যর্থ হয়েছে')
     }
 }
 
-export async function handleSignIn(value, addUser, setLoading, navigate, location, toast, socket) {
+export async function handleSignIn(value, addUser,addNotifications, setLoading, router, toast, socket) {
     try {
         setLoading(true)
         const res = await axios.post(`${api_url}/api/auth/signin`, value)
         if (res.data.status === 200) {
             setLoading(false)
+
             if (!res.data.data.isVerified) {
                 localStorage.setItem('accessToken', res.data.data.token)
-                navigate('/verify')
+                router.push('/verify')
+
             } else {
+
                 localStorage.setItem('accessToken', res.data.data.token)
                 addUser((res.data.data))
+
+                addNotifications(res.data.data.notifications)
+
                 socket.emit('join_chat', { id: res.data.data._id })
+
                 if (location.state?.from) {
-                    navigate(location.state.from)
+                    router.push(location.state.from)
                 } else {
-                    navigate('/')
+                    router.push('/')
                 }
             }
         }
     } catch (error) {
         setLoading(false)
-        if (error.response.data.message) {
-            toast.error(error.response.data.message)
+        console.log(error)
+        if (error?.message) {
+            return toast({
+                description: error.message,
+                status: 'error',
+                duration: 2000,
+                isClosable: true,
+            })
         } else {
-            toast.error('প্রবেশ করতে সমস্যা হচ্ছে')
+            return toast({
+                description: 'প্রবেশ করতে সমস্যা হচ্ছে !',
+                status: 'error',
+                duration: 2000,
+                isClosable: true,
+            })
         }
     }
 }
@@ -91,7 +109,7 @@ export async function uploadPhoto(user, file, reload, setLoading, toast) {
     }
 }
 
-export async function handleVerify(code, navigate, setLoading, setVerified, toast) {
+export async function handleVerify(code, router, setLoading, setVerified, toast) {
     if (!code) {
         return toast.error('অনুগ্রহ পূর্বক যাচাইকরন কোড টি লিখুন')
     }
@@ -106,7 +124,7 @@ export async function handleVerify(code, navigate, setLoading, setVerified, toas
             setLoading(false)
             setVerified(true)
             setTimeout(() => {
-                navigate('/signin')
+                router.push('/signin')
             }, 2000)
         }
     } catch (error) {

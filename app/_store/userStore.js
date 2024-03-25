@@ -5,8 +5,6 @@ const userStore = (set) => ({
     isAuth: false,
     user: {},
     notifications : [],
-    doctors: [],
-    hospital: {},
     random: 0,
     addUser: (user) => {
         set((state) => ({
@@ -18,6 +16,11 @@ const userStore = (set) => ({
     addDoctors: (doctors) => {
         set((state) => ({
             doctors: doctors
+        }))
+    },
+    addNotifications: (notifications) => {
+        set((state) => ({
+            notifications : notifications 
         }))
     },
     addNewNotification: (notification) => {
@@ -52,6 +55,7 @@ const userStore = (set) => ({
         set((state) => ({
             isAuth: false,
             user: {},
+            notifications : [],
         }))
     },
     reload: () => {
