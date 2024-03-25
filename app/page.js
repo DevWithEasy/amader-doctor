@@ -12,13 +12,13 @@ async function getData() {
   return res.json()
 }
 export default async function Home() {
-  const { data } = await getData()
-  console.log(data)
+  const { data : {doctors,specializations} } = await getData()
+  
   return (
     <main className="mx-4 md:w-10/12 md:mx-auto space-y-5">
       <Hero/>
-      <SearchAndCategory/>
-      <DoctorList {...{doctors : data.doctors}}/>
+      <SearchAndCategory {...{specializations}}/>
+      <DoctorList {...{doctors}}/>
 
 
     </main>

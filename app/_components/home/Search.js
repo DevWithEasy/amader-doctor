@@ -6,7 +6,7 @@ import { CiSearch } from "react-icons/ci"
 import { useToast } from '@chakra-ui/react'
 import dayNameBangla from "@/app/_utils/dayNameBangla";
 
-export default function Search() {
+export default function Search({ specializations }) {
     const toast = useToast()
     const router = useRouter()
     const [specialization, setSpecialization] = useState("")
@@ -56,6 +56,18 @@ export default function Search() {
                     placeholder="নাম লিখুন..."
                     className='px-2 py-1 border focus:outline-blue-500 rounded'
                 /> */}
+                <select
+                    onChange={(e) => setSpecialization(e.target.value)}
+                    className="px-2 py-1 border focus:outline-blue-500 rounded"
+                >
+                    <option>অভিজ্ঞতা বাছাই করুন</option>
+                    {specializations &&
+                        specializations.map(s => (
+                                <option key={s._id} value={s._id}>
+                                    {s.name}
+                                </option>
+                            ))}
+                </select>
                 <select
                     onChange={(e) => setDay(e.target.value)}
                     className="px-2 py-1 border focus:outline-blue-500 rounded"

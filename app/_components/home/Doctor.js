@@ -1,6 +1,7 @@
 import api_url from "@/app/_utils/apiurl";
 import Image from "next/image";
 import Link from "next/link";
+import {toBengaliNumber} from 'bengali-number'
 
 export default function Doctor({ doctor }) {
     return (
@@ -23,14 +24,14 @@ export default function Doctor({ doctor }) {
                 <button
                     className='mb-2 px-4 py-1 bg-blue-50 text-blue-500 rounded-full'
                 >
-                    {doctor?.specialization}
+                    {doctor?.specialization?.name}
                 </button>
                 <p className='text-lg font-semibold'>{doctor?.name}</p>
-                <p>{doctor?.experienceArea}</p>
+                <p className="text-blue-500">{toBengaliNumber(doctor?.experience)} বছরের অভিজ্ঞতায়</p>
                 {
                     doctor?.designation && doctor?.workedAt && <p>{doctor?.designation} , {doctor?.workedAt}</p>
                 }
-                <p>সার্ভিস চার্জ - {doctor?.feesPerConsultation}</p>
+                <p>সার্ভিস চার্জ - <span className="font-bold">{toBengaliNumber(doctor?.feesPerConsultation)}</span> টাকা</p>
             </div>
             <div
                 className="pt-3"
