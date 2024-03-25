@@ -9,14 +9,14 @@ export default function SearchAndCategory({specializations}) {
         >
             <Search {...{specializations}}/>
             <div
-                className="flex justify-center space-x-2"
+                className="md:w-10/12 md:mx-auto grid grid-cols-3 md:grid-cols-6 gap-2"
             >
                 {specializations &&
-                    specializations.map(s=>
+                    specializations.slice(0,6).map(s=>
                         <Link
                             key={s._id}
                             href={`/doctors/search/${s._id}`}
-                            className="px-4 py-2 flex flex-col items-center space-y-3 bg-blue-100 hover:bg-blue-200 transition-all duration-300 rounded-md"
+                            className="min-w-[150px] px-4 py-2 flex flex-col items-center space-y-3 bg-blue-100 hover:bg-blue-200 transition-all duration-300 rounded-md"
                         >
                             <Image
                                 src='/image/brain.png'
