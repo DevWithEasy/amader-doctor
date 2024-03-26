@@ -84,7 +84,7 @@ export default function Search({ specializations }) {
                 </select>
                 <button
                     onClick={handleFind}
-                    className='px-4 py-1.5 flex items-center space-x-2 bg-blue-500 text-white rounded'
+                    className='px-6 py-1.5 flex items-center space-x-2 bg-blue-500 text-white rounded'
                 >
                     <CiSearch />
                     <span>খুঁজুন</span>
