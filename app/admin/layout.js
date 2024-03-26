@@ -9,7 +9,7 @@ export default function AdminLayout({ children }) {
         <div className="h-[calc(100vh-60px)] flex justify-between font-bangla">
             <div className="md:w-2/12 p-4 pt-4 flex flex-col space-y-2">
                 <Link
-                    href="/admin/dashboard"
+                    href="/admin"
                     className='flex items-center space-x-2 px-4 py-1 rounded-full'
                 >
                     <FaHome />

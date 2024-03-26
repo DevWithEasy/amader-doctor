@@ -1,7 +1,12 @@
+import Heading from '@/app/_components/Heading'
 import React from 'react'
 
 export default function Users() {
     return (
-        <div>Users</div>
+        <div>
+            <Heading>
+                ব্যবহারকারী
+            </Heading>
+        </div>
     )
 }
