@@ -4,12 +4,27 @@ import api_url from "./apiurl"
 export async function handleSignUp(value, router, toast) {
     try {
         const res = await axios.post(`${api_url}/api/auth/signup`, value)
-        toast.success('আপনার একাউন্টটি সফল ভাবে তৈরি হয়েছে')
+
         localStorage.setItem('accessToken', res.data.token)
-        router.push('/verify')
+
+        router.push('/user/verify')
+
+        return toast({
+            description: "আপনার একাউন্টটি সফল ভাবে তৈরি হয়েছে",
+            status: 'success',
+            duration: 2000,
+            isClosable: true,
+        })
     } catch (error) {
         console.log(error)
-        toast.error('আপনার একাউন্ট তৈরিতে ব্যর্থ হয়েছে')
+
+        return toast({
+            title : "আপনার একাউন্ট তৈরিতে ব্যর্থ হয়েছে",
+            description: error?.response?.data?.message || error?.message ,
+            status: 'error',
+            duration: 2000,
+            isClosable: true,
+        })
     }
 }
 
@@ -22,7 +37,7 @@ export async function handleSignIn(value, addUser,addNotifications, setLoading, 
 
             if (!res.data.data.isVerified) {
                 localStorage.setItem('accessToken', res.data.data.token)
-                router.push('/verify')
+                router.push('/user/verify')
 
             } else {
 
@@ -111,7 +126,13 @@ export async function uploadPhoto(user, file, reload, setLoading, toast) {
 
 export async function handleVerify(code, router, setLoading, setVerified, toast) {
     if (!code) {
-        return toast.error('অনুগ্রহ পূর্বক যাচাইকরন কোড টি লিখুন')
+        return toast({
+            title: 'কোড লিখুন',
+            description: "অনুগ্রহ পূর্বক যাচাইকরন কোড টি লিখুন",
+            status: 'error',
+            duration: 2000,
+            isClosable: true,
+        })
     }
     try {
         setLoading(true)
@@ -124,7 +145,7 @@ export async function handleVerify(code, router, setLoading, setVerified, toast)
             setLoading(false)
             setVerified(true)
             setTimeout(() => {
-                router.push('/signin')
+                router.push('/user/signin')
             }, 2000)
         }
     } catch (error) {
@@ -145,10 +166,22 @@ export async function handleSendCodeAgain(toast) {
             }
         })
         if (res.data.status === 200) {
-            toast.success('Code send successfully.')
+            return toast({
+                title: 'সফল হয়েছে',
+                description: "ভেরিফিকেশন কোড পাঠানো হয়েছে",
+                status: 'success',
+                duration: 2000,
+                isClosable: true,
+            })
         }
     } catch (error) {
-        toast.error('Verification Failed')
+        return toast({
+            title: 'ব্যর্থ হয়েছে',
+            description: "ভেরিফিকেশন কোড পাঠাতে আবার চেষ্টা করুন",
+            status: 'error',
+            duration: 2000,
+            isClosable: true,
+        })
     }
 
 }

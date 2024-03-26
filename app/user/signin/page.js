@@ -24,7 +24,7 @@ export default function Signin() {
     })
 
     return (
-        <div className="w-10/12 md:w-5/12 mx-auto px-4 py-2 border rounded space-y-2 bg-white/50">
+        <div className="mt-3 w-10/12 md:w-5/12 mx-auto px-4 py-2 border rounded space-y-2 bg-white/50">
             <h1 className="text-2xl font-bold text-center uppercase border-b py-2">প্রবেশ করুন</h1>
             <div className=" space-y-1">
                 <label>আপনার ই-মেইল অথবা নাম্বার লিখুন : </label>

@@ -1,14 +1,16 @@
-"use client";
-import { useEffect, useState } from "react";
-import { useToast } from "@chakra-ui/react";
-import Input from "@/app/_components/Input";
-import { handleApplyDoctor } from "@/app/_utils/doctors_utils";
-import handleChange from "@/app/_utils/handleChange";
+"use client"
+import { useEffect, useState } from "react"
+import { useToast } from "@chakra-ui/react"
+import Input from "@/app/_components/Input"
+import { handleApplyDoctor } from "@/app/_utils/doctors_utils"
+import handleChange from "@/app/_utils/handleChange"
 import axios from 'axios'
-import api_url from "@/app/_utils/apiurl";
+import api_url from "@/app/_utils/apiurl"
+import { useRouter } from "next/navigation"
 
 export default function ApplyDoctor() {
   const toast = useToast();
+  const router  = useRouter()
   const [specialists, setSpecialists] = useState([]);
   const [value, setValue] = useState({
     name: "",
@@ -23,7 +25,7 @@ export default function ApplyDoctor() {
     experienceArea: "",
     feesPerConsultation: "",
     chambers: [],
-  });
+  })
 
   useEffect(() => {
     const getSpecialist = async () => {
@@ -39,11 +41,12 @@ export default function ApplyDoctor() {
       } catch (error) {
         console.log(error);
       }
-    };
-    getSpecialist();
-  }, []);
+    }
+    getSpecialist()
+  }, [])
+
   return (
-    <div className="mx-4 md:w-10/12 md:mx-auto space-y-2 pb-5">
+    <div className="mt-3 mx-4 md:w-10/12 md:mx-auto space-y-2 pb-5">
       <h1 className="text-2xl font-bold text-center text-blue-500">
         ডাক্তার প্রোফাইলের আবেদন
       </h1>
@@ -111,6 +114,7 @@ export default function ApplyDoctor() {
         <div>
           <label className="block">অভিজ্ঞতার বিষয়: </label>
           <select
+            name="specialization"
             onChange={(e) => handleChange(e, value, setValue)}
             className="w-full p-2 border rounded focus:outline-blue-500"
           >
@@ -148,7 +152,7 @@ export default function ApplyDoctor() {
         />
       </div>
       <button
-        onClick={() => handleApplyDoctor(value, toast)}
+        onClick={() => handleApplyDoctor(value,router, toast)}
         className="p-2 bg-blue-500 text-white rounded hover:bg-blue-600 hover:transition-all hover:duration-300"
       >
         আবেদন জমা দিন

@@ -38,7 +38,7 @@ const UserMenu = () => {
               className="text-black"
             >
               <Link
-                href="/admin/dashboard"
+                href="/admin"
               >
                 এডমিন ড্যাশবোর্ড
               </Link>
@@ -59,7 +59,7 @@ const UserMenu = () => {
               className="text-black"
             >
               <Link
-                href="/apply_doctor"
+                href="/doctors/apply_new_doctor"
               >
                 ডাক্তার প্রোফাইলের আবেদন
               </Link>

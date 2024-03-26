@@ -1,8 +1,8 @@
 import axios from "axios"
 import { toBengaliNumber } from "bengali-number"
-import api_url from "./apiUrl"
+import api_url from "./apiurl"
 
-export async function handleApplyDoctor(value,toast){
+export async function handleApplyDoctor(value,router,toast){
     try {
         const res = await axios.post(`${api_url}/api/doctor/apply`,value,{
             headers : {
@@ -10,11 +10,24 @@ export async function handleApplyDoctor(value,toast){
             }
         })
         if(res.data.status === 200){
-            toast.success('Applied Doctor successfully.')
+            router.push('/')
+            return toast({
+                title : 'সফল হয়েছে',
+                description: "আমাদের প্রতিনিধি আপনার সাথে যোগাযোগ করবে।",
+                status: 'success',
+                duration: 2000,
+                isClosable: true,
+            })
         }
     } catch (error) {
         if(error){
-            toast.error(error.message)
+            return toast({
+                title: 'ব্যর্থ হয়েছে',
+                description: error?.response?.data?.message || error.message,
+                status: 'error',
+                duration: 2000,
+                isClosable: true,
+            })
         }
     }
 }

@@ -7,6 +7,7 @@ import { useToast } from '@chakra-ui/react'
 import { handleSignUp } from "@/app/_utils/users_utils";
 import handleChange from "@/app/_utils/handleChange";
 import Input from "@/app/_components/Input";
+import passwordView from "@/app/_utils/passwordView";
 
 export default function Signup() {
   const toast = useToast()
@@ -72,7 +73,7 @@ export default function Signup() {
         </div>
       </div>
       <button
-        onClick={() => handleSignUp(value, navigate, toast)}
+        onClick={() => handleSignUp(value, router, toast)}
         className="w-full p-2 bg-blue-400 text-white rounded hover:bg-blue-500 hover:transition-all hover:duration-300"
       >
         একাউন্ট খুলুন
