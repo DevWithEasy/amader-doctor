@@ -34,19 +34,20 @@ export default function Delete({ path, deleteView, setDeleteView }) {
                 <AlertDialogOverlay />
 
                 <AlertDialogContent>
-                    <AlertDialogHeader className="font-bangla">মুছে ফেলুন ?</AlertDialogHeader>
-                    <AlertDialogCloseButton 
-                        onClick={()=>setDeleteView(!deleteView)} 
-                    />
+                    <AlertDialogHeader className="font-bangla">
+                        মুছে ফেলুন ?
+                    </AlertDialogHeader>
+
                     <AlertDialogBody className="font-bangla">
                         মুছে ফেললে এটা ডাটাবেস থেকে চিরতরে মুছে যাবে আর ফিরিয়ে আনতে পারবেন না।
                     </AlertDialogBody>
+
                     <AlertDialogFooter className="space-x-2 font-bangla">
                         <button 
                             onClick={()=>setDeleteView(!deleteView)} 
                             className='py-2 px-6 bg-gray-500 text-white rounded-md'
                         >
-                            নিশ্চিত না
+                            বাতিল
                         </button>
                         <button 
                             onClick={() => deleteChamber()} 

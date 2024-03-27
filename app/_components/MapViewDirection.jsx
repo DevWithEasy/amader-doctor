@@ -3,8 +3,8 @@ import L from 'leaflet'
 import 'leaflet-routing-machine'
 import 'leaflet/dist/leaflet.css'
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css'
-import locationIcon from '../assets/images/location.png'
-import carIcon from '../assets/images/car.png'
+// import locationIcon from '/image/placeholder.png'
+// import carIcon from '/image/car.png'
 
 const MapViewDirection = ({ view, setView, hospital }) => {
     const mapRef = useRef(null)
@@ -46,7 +46,7 @@ const MapViewDirection = ({ view, setView, hospital }) => {
                         const yourMarker = L.marker(
                             [latitude, longitude],
                             {
-                                icon: destinationIcon(carIcon)
+                                icon: destinationIcon('/image/car.png')
                             }
                         ).addTo(map)
 
@@ -61,7 +61,7 @@ const MapViewDirection = ({ view, setView, hospital }) => {
             const destinationMarker = L.marker(
                 [Number(hospital?.lat), Number(hospital?.long)],
                 {
-                    icon: destinationIcon(locationIcon)
+                    icon: destinationIcon('/image/placeholder.png')
                 }
             ).addTo(map)
 
@@ -73,7 +73,7 @@ const MapViewDirection = ({ view, setView, hospital }) => {
 
     return (
         <div
-            className='fixed top-0 left-0 h-screen w-full overflow-hidden z-50 pt-16 px-4 bg-slate-500/50  space-y-2'
+            className='fixed -top-2 left-0 h-screen w-full overflow-hidden z-50 pt-16 px-4 bg-slate-500/50  space-y-2'
         >
             <button
                 onClick={() => setView(!view)}

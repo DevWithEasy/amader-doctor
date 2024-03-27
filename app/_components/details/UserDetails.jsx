@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { useParams } from 'react-router-dom';
-import useServiceStore from "../../features/serviceStore";
-import api_url from "../../utils/apiUrl";
-import dateGenerator from "../../utils/dateGenerator";
+import { useParams } from 'next/navigation';
+import useServiceStore from "@/app/_store/serviceStore";
 import Heading from "../Heading";
+import Image from 'next/image'
 
 export default function UserDetails() {
   const { id } = useParams()
@@ -19,9 +18,11 @@ export default function UserDetails() {
       <div
         className="p-2 space-y-2"
       >
-        <img
+        <Image
           src={`${api_url}/${user?.image?.url}`}
           alt={user?.name}
+          height={150}
+          width={150}
           className="h-[150px] w-[150px] mx-auto rounded-full hover:transition-all hover:duration-300"
         />
         <div className="font-bangla">

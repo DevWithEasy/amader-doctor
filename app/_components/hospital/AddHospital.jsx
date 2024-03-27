@@ -1,3 +1,5 @@
+import useUserStore from '@/app/_store/userStore'
+import api_url from '@/app/_utils/apiurl'
 import {
     Modal,
     ModalBody,
@@ -6,16 +8,15 @@ import {
     ModalFooter,
     ModalHeader,
     ModalOverlay,
+    useToast
 } from '@chakra-ui/react'
 import axios from "axios"
 import { useState } from "react"
-import { toast } from 'react-hot-toast'
-import useUserStore from "../../features/userStore"
-import handleChange from "../../utils/handleChange"
-import Input from "../Input"
-import api_url from '../../utils/apiUrl'
+import Input from '../Input'
+import handleChange from '@/app/_utils/handleChange'
 
-export default function AddHospital({view,setView}) {
+export default function AddHospital({ view, setView }) {
+    const toast = useToast()
     const { reload } = useUserStore()
     const [value, setValue] = useState({
         name: '',
@@ -36,11 +37,16 @@ export default function AddHospital({view,setView}) {
         if (res.data.success) {
             reload()
             setView(!view)
-            toast.success('Successfully added')
+            return toast({
+                title: 'সফল হয়েছে',
+                description: "নতুন হাসপাতাল যুক্ত হয়েছে। ",
+                status: 'success',
+                duration: 2000,
+                isClosable: true,
+            })
         }
     }
     return (
-
         <>
             <Modal isOpen={view}>
                 <ModalOverlay />
@@ -48,7 +54,6 @@ export default function AddHospital({view,setView}) {
                     <ModalHeader className='font-bangla'>
                         নতুন সেবা প্রতিষ্ঠান যোগ করুন
                     </ModalHeader>
-                    <ModalCloseButton onClick={()=>setView(!view)}/>
                     <ModalBody>
                         <div className="p-2 space-y-2 font-bangla">
                             <Input {...{
@@ -69,7 +74,9 @@ export default function AddHospital({view,setView}) {
 
                             <div className="w-full space-y-1">
                                 <label className="block">প্রতিষ্ঠানের ধরণ  : </label>
-                                <select name='type' onChange={(e) => handleChange(e, value, setValue)} className='w-full p-2 border rounded focus:outline-none focus:ring-2'>
+                                <select 
+                                name='type' 
+                                onChange={(e) => handleChange(e, value, setValue)} className='w-full p-2 border rounded focus:outline-blue-500'>
                                     <option value="">বাছাই করুন </option>
                                     <option value="hospital">হাসপাতাল </option>
                                     <option value="diagnostic">ডায়নোগষ্টিক সেন্টার </option>
@@ -117,7 +124,18 @@ export default function AddHospital({view,setView}) {
                     </ModalBody>
 
                     <ModalFooter className='space-x-2 font-bangla'>
-                        <button onClick={() => addHospital()} className='py-2 px-6 bg-green-400 text-white rounded-md'>নিশ্চিত করুন</button>
+                        <button
+                            onClick={() => setView(!view)}
+                            className='py-2 px-6 bg-gray-500 text-white rounded-md'
+                        >
+                            বাতিল
+                        </button>
+                        <button
+                            onClick={() => addHospital()}
+                            className='py-2 px-6 bg-blue-500 text-white rounded-md'
+                        >
+                            নিশ্চিত করুন
+                        </button>
                     </ModalFooter>
                 </ModalContent>
             </Modal>

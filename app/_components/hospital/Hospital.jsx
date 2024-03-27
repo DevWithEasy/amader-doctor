@@ -1,32 +1,37 @@
-import { useNavigate } from 'react-router-dom'
-import api_url from '../../utils/apiUrl'
+import api_url from '@/app/_utils/apiurl'
+import { useRouter } from 'next/navigation'
+import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Hospital({ hospital }) {
-    const navigate = useNavigate()
-    
+
     return (
-        <div
-            onClick={() => navigate(`/hospital/${hospital?._id}`)}
-            className="space-y-2 bg-white border rounded cursor-pointer"
+        <Link
+            href={`/hospitals/${hospital?._id}`}
+            className="p-2 space-y-2 bg-white border hover:border-blue-500 rounded cursor-pointer"
         >
-            <img src={`${api_url}/${hospital?.image}`} alt="" className='w-full' />
             <div
-                className='p-2 space-y-2'
+                className='p-2 space-y-3'
             >
-                <p className='text-xl font-bold text-blue-500'>
-                    {hospital?.name}
-                </p>
-                <p>{hospital?.location}</p>
-                <p
-                    className='inline-block px-4 py-1 bg-green-500 text-white text-sm rounded-full'
+                <button
+                    className='inline-block px-4 py-1 bg-blue-100 text-blue-600 text-sm rounded-full'
                 >
                     {
                         hospital?.type === 'hospital' ? 'হাসপাতাল' :
                             hospital?.type === 'diagnostic' ? 'ডায়নোগষ্টিক সেন্টার ' :
                                 hospital?.type === 'clinic' ? 'ক্লিনিক ' : 'নিজস্ব চেম্বার'
                     }
-                </p>
+                </button>
+                <div>
+                    <p
+                        className='font-semibold text-blue-500'
+                    >
+                        {hospital?.name}
+                    </p>
+                    <p className='text-gray-500'>{hospital?.location}</p>
+                </div>
             </div>
-        </div>
+        </Link>
+
     )
 }

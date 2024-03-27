@@ -1,3 +1,5 @@
+import useUserStore from '@/app/_store/userStore'
+import api_url from '@/app/_utils/apiurl'
 import {
     Modal,
     ModalBody,
@@ -6,16 +8,15 @@ import {
     ModalFooter,
     ModalHeader,
     ModalOverlay,
+    useToast
 } from '@chakra-ui/react'
 import axios from "axios"
 import { useState } from "react"
-import { toast } from 'react-hot-toast'
-import Input from "../Input"
-import useUserStore from '../../features/userStore'
-import api_url from '../../utils/apiUrl'
+import Input from '../Input'
 
 
 export default function AddSpecialist({view,setView}) {
+    const toast = useToast()
     const {reload} = useUserStore()
     const [value, setValue] = useState({
         name: ''
@@ -29,7 +30,13 @@ export default function AddSpecialist({view,setView}) {
         })
         if (res.data.status === 200) {
             reload()
-            toast.success(res.data.message)
+            return toast({
+                title: 'সফল হয়েছে',
+                description: "নতুন অভিজ্ঞতার বিষয়টি যুক্ত হয়েছে। ",
+                status: 'success',
+                duration: 2000,
+                isClosable: true,
+            })
         }
     }
     return (
@@ -41,7 +48,6 @@ export default function AddSpecialist({view,setView}) {
                     <ModalHeader className='font-bangla'>
                         বিশেষজ্ঞ বিষয় যোগ করুন
                     </ModalHeader>
-                    <ModalCloseButton onClick={()=>setView(!view)}/>
                     <ModalBody>
                         <div className="p-2 space-y-2 font-bangla">
                             <Input 
@@ -56,6 +62,12 @@ export default function AddSpecialist({view,setView}) {
                     </ModalBody>
 
                     <ModalFooter className='space-x-2'>
+                    <button 
+                            onClick={()=>setView(!view)} 
+                            className='py-2 px-6 font-bangla bg-gray-500 text-white rounded-md'
+                        >
+                            বাতিল
+                        </button>
                         <button 
                             onClick={() => addSpecialist()} 
                             className='py-2 px-6 font-bangla bg-blue-500 text-white rounded-md'

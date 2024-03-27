@@ -7,7 +7,7 @@ export default function Doctor({ doctor }) {
     return (
         <div
             key={doctor._id}
-            className="p-3 flex flex-col border rounded-md space-y-2"
+            className="p-3 flex flex-col border hover:border-blue-500 rounded-md space-y-2"
         >
             <div className=''>
                 <Image

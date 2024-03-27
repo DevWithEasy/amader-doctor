@@ -1,8 +1,12 @@
+'use client'
 import axios from "axios"
 import { useState } from "react"
 import { useParams,useRouter } from 'next/navigation'
 import useServiceStore from "@/app/_store/serviceStore"
 import useUserStore from "@/app/_store/userStore"
+import api_url from "@/app/_utils/apiurl"
+import Heading from "@/app/_components/Heading"
+import Input from "@/app/_components/Input"
 
 export default function UpdateSpecialist() {
     const router = useRouter()
@@ -47,7 +51,7 @@ export default function UpdateSpecialist() {
                 }} />
                 <button
                     onClick={() => updateSpecialist()}
-                    className='py-2 px-6 font-bangla bg-green-400 text-white rounded-md'
+                    className='py-2 px-6 font-bangla bg-blue-500 hover:bg-blue-600 text-white rounded-md'
                 >
                     {process ? 'কাজ হচ্ছে...' : 'নিশ্চিত'}
                 </button>

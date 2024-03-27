@@ -19,7 +19,7 @@ export default function SearchAndCategory({ specializations }) {
                             <Link
                                 key={s._id}
                                 href={`/doctors/search/${s._id}`}
-                                className="min-w-[150px] px-4 py-2 flex flex-col items-center space-y-3 bg-blue-100 hover:bg-blue-200 transition-all duration-300 rounded-md"
+                                className="min-w-[150px] px-4 py-2 flex flex-col items-center space-y-3 bg-blue-100 hover:bg-blue-200 border border-blue-100 hover:border-blue-500 transition-all duration-300 rounded-md"
                             >
                                 <Image
                                     src='/image/brain.png'

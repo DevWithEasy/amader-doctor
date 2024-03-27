@@ -13,6 +13,7 @@ import { BiImageAdd } from "react-icons/bi"
 import { FiUploadCloud } from 'react-icons/fi'
 import useUserStore from '../_store/userStore'
 import Image from 'next/image'
+import { uploadPhoto } from '../_utils/users_utils'
 
 export default function Upload(props) {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -33,9 +34,9 @@ export default function Upload(props) {
         <>
             <button
                 onClick={onOpen}
-                className="flex items-center px-6 py-1 space-x-2 bg-green-400 text-white rounded-full hover:bg-green-500"
+                className="flex items-center px-4 py-1 space-x-2 bg-blue-500 text-white rounded-full hover:bg-blue-600"
             >
-                <BiImageAdd size={20} />
+                {/* <BiImageAdd size={20} /> */}
                 <span>ছবি পরিবর্তন</span>
             </button>
 
@@ -59,16 +60,16 @@ export default function Upload(props) {
                         <label htmlFor="image" className="flex justify-center items-center my-2 p-2 space-x-3 border-2 border-dashed rounded-md cursor-pointer">
                             <FiUploadCloud size={30} />
                             <p className="text-center">
-                                <span className='text-xl font-bold text-blue-400'>ছবি বাছাই করুন </span>
+                                <span className='font-semibold text-blue-500'>ছবি বাছাই করুন </span>
                                 <br />
-                                <span className="text-gray-300 text-sm">jpg,jpeg,png এই ফরমেটের ছবি আপলোড করতে পারবেন।</span>
+                                <span className="text-gray-500 text-sm">jpg,jpeg,png এই ফরমেটের ছবি আপলোড করতে পারবেন।</span>
                             </p>
                         </label>
                         <input type="file" id="image" onChange={(e) => handleFile(e)} className='hidden' />
                         {!loading && <div className="flex justify-center items-center py-2">
                             <button
                                 onClick={() => uploadPhoto(user, file, reload, setLoading, toast)}
-                                className="flex items-center px-6 py-1 space-x-2 bg-green-400 text-white rounded-full hover:bg-green-500"
+                                className="flex items-center px-6 py-1 space-x-2 bg-blue-500 text-white rounded-full hover:bg-blue-600"
                             >
                                 <BiImageAdd size={20} />
                                 <span>আপলোড করুন</span>
