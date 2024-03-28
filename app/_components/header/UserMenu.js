@@ -70,7 +70,7 @@ const UserMenu = () => {
               className="text-black"
             >
               <Link
-                href="/doctor/allAppointments"
+                href="/doctors/appointments"
               >
                 অ্যাপয়েন্টমেন্ট সমুহ
               </Link>

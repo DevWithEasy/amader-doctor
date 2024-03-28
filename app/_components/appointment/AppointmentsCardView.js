@@ -1,10 +1,8 @@
+import useUserStore from '@/app/_store/userStore';
+import { cancelAppointment } from '@/app/_utils/appoimtments_utils';
+import AppointmentStatusBangla from '@/app/_utils/AppointmentStatusBangla';
 import { toBengaliNumber } from 'bengali-number';
-import { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import useUserStore from '../../features/userStore';
-import AppointmentStatusBangla from '../../utils/AppointmentStatusBangla';
-import { cancelAppointment } from '../../utils/appoimtments_utils';
-import dayNameBangla from '../../utils/dayNameBangla';
 
 const AppointmentsCardView = ({ appointments,setAppointments, setView, setId }) => {
     const { user } = useUserStore()

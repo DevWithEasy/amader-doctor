@@ -36,7 +36,7 @@ export default function Profile() {
         />
         <Upload />
       </div>
-      <div className="md:w-8/12">
+      <div className="md:w-8/12 space-y-5">
         <div>
           <label>নামঃ</label>
           <input
@@ -72,16 +72,14 @@ export default function Profile() {
           />
         </div>
 
-        <div className="flex justify-center items-center pt-4">
-          <button
+        <button
             onClick={() =>
               updateUser(id, user, address, setUser, addUser, toast)
             }
-            className="px-6 py-1 bg-green-400 text-white rounded-full hover:bg-green-500"
+            className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
           >
             সংরক্ষন করুন
           </button>
-        </div>
       </div>
     </div>
   );

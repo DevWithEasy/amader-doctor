@@ -12,10 +12,9 @@ import {
 import { useEffect, useRef, useState } from "react"
 import { AiOutlinePrinter } from "react-icons/ai"
 import { useReactToPrint } from "react-to-print"
-import { getAppointmentDetails, getAppointmentStatus } from '../utils/appoimtments_utils'
-import PrintHeader from "./PrintHeader"
+import { getAppointmentDetails, getAppointmentStatus } from '../_utils/appoimtments_utils'
+import PrintHeader from './PrintHeader'
 
-// eslint-disable-next-line react/prop-types
 export default function AppointmentDetails({ id, view, setView}) {
     const {onClose} = useDisclosure()
     const printRef = useRef()

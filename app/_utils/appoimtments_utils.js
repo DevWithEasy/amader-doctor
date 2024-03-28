@@ -1,6 +1,6 @@
 import axios from "axios";
-import socket from '../utils/socket'
-import api_url from "./apiUrl";
+import socket from "./socket";
+import api_url from "./apiurl";
 
 
 export async function addAppointment(data,toast,navigate,onOpen){

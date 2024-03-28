@@ -17,29 +17,29 @@ export default function Layout({ children }) {
                     href={`/user/${id}/`}
                     className={`block p-2 rounded ${pathname === id && 'bg-gray-100'}`}
                 >
-                    Profile
+                    প্রোফাইল
                 </Link>
                 <Link
                     href={`/user/${id}/info`}
                     className={`block p-2 rounded ${pathname === 'info' && 'bg-gray-100'}`}
                 >
-                    Personal info
+                    ব্যক্তিগত তথ্য
                 </Link>
                 <Link
                     href={`/user/${id}/appointments`}
                     className={`block p-2 rounded ${pathname === 'appointments' && 'bg-gray-100'}`}
                 >
-                    Appointments
+                    অয়াপয়েন্টমেন্ট সমূহ
                 </Link>
                 <Link
                     href={`/user/${id}/transections`}
                     className={`block p-2 rounded ${pathname === 'transections' && 'bg-gray-100'}`}
                 >
-                    Transections
+                    ট্রানজেকশন সমুহ
                 </Link>
             </div>
             <div
-                className='w-10/12'
+                className='w-10/12 h-[calc(100vh-60px)] overflow-y-auto'
             >
                 {children}
             </div>
