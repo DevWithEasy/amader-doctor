@@ -38,7 +38,7 @@ export default function Doctor({ doctor }) {
             >
                 <Link
                     href={`/appointment/submit/${doctor?._id}`}
-                    className="block py-1 text-center border border-blue-500 text-blue-500 rounded-full"
+                    className="block py-1 text-center border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white rounded-full"
                 >
                     অ্যাপয়েন্টমেন্ট নিন
                 </Link>
