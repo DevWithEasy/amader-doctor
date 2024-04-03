@@ -5,7 +5,7 @@ import {useRouter} from 'next/navigation'
 
 export default function Pagination({ total }) {
     const router = useRouter()
-    const pages = Math.ceil(total / 10)
+    const pages = Math.ceil(55 / 10)
     const changePage = ({ selected }) => {
         router.push(`/doctors/pages/${selected}`)
     };
@@ -18,7 +18,7 @@ export default function Pagination({ total }) {
                 pageRangeDisplayed={2}
                 pageCount={pages}
                 previousLabel="<"
-                renderOnZeroPageCount={null}
+                renderOnZeroPageCount={3}
                 containerClassName="paginate"
                 previousClassName="previousBtn"
                 nextsClassName="nextBtn"
