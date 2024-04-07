@@ -27,11 +27,12 @@ export default async function AppointmentSubmit({ params }) {
             alt=""
             width={96}
             height={96}
-            className='h-24 w-24 rounded-md'
+            className='h-28 w-28 rounded-md'
           />
           <div>
             <p className='font-bold'>{data?.name}</p>
-            <p>{data?.education},{data?.specialization}</p>
+            <p className="text-blue-500">{data?.specialization?.name}</p>
+            <p>{data?.education}</p>
             <p>{data?.experienceArea}</p>
             <p>সার্ভিস চার্জ - {data?.feesPerConsultation}</p>
           </div>

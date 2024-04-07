@@ -49,7 +49,7 @@ const UserMenu = () => {
               className="text-black"
             >
               <Link
-                href="/doctor"
+                href={`/user/doctor/${user?._id}`}
               >
                 ডাক্তার ড্যাশবোর্ড
               </Link>

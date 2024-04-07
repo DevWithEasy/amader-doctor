@@ -1,7 +1,7 @@
 import api_url from "@/app/_utils/apiurl";
 import Image from "next/image";
 import Link from "next/link";
-import {toBengaliNumber} from 'bengali-number'
+import { toBengaliNumber } from 'bengali-number'
 
 export default function Doctor({ doctor }) {
     return (
@@ -9,7 +9,9 @@ export default function Doctor({ doctor }) {
             key={doctor._id}
             className="p-3 flex flex-col border hover:border-blue-500 rounded-md space-y-2"
         >
-            <div className=''>
+            <Link
+                href={`/doctors/${doctor?._id}`}
+            >
                 <Image
                     src={`${api_url}/${doctor?.user?.image?.url}`}
                     alt=""
@@ -17,8 +19,9 @@ export default function Doctor({ doctor }) {
                     height={50}
                     className='w-[500px] h-[200px] rounded-md'
                 />
-            </div>
-            <div
+            </Link>
+            <Link
+                href={`/doctors/${doctor?._id}`}
                 className="flex-1"
             >
                 <button
@@ -26,13 +29,19 @@ export default function Doctor({ doctor }) {
                 >
                     {doctor?.specialization?.name}
                 </button>
-                <p className='text-lg font-semibold'>{doctor?.name}</p>
+
+                <p
+                    className='block text-lg font-semibold'
+                >
+                    {doctor?.name}
+                </p>
+
                 <p className="text-blue-500">{toBengaliNumber(doctor?.experience)} বছরের অভিজ্ঞতায়</p>
                 {
                     doctor?.designation && doctor?.workedAt && <p>{doctor?.designation} , {doctor?.workedAt}</p>
                 }
                 <p>সার্ভিস চার্জ - <span className="font-bold">{toBengaliNumber(doctor?.feesPerConsultation)}</span> টাকা</p>
-            </div>
+            </Link>
             <div
                 className="pt-3"
             >

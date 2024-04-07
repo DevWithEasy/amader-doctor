@@ -4,7 +4,7 @@ import Pagination from "../_components/Pagination"
 import Specializations from "../_components/doctors/Specializations"
 
 async function getData() {
-    const randomParam = Math.random().toString(36).substring(7)
+    const randomParam = Math.random().toString(36).substring(7);
     const res = await fetch(`${api_url}/api/doctor/home-data?${randomParam}`)
 
     if (!res.ok) {

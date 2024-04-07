@@ -3,8 +3,6 @@ import useUserStore from '@/app/_store/userStore';
 import handleChange from '@/app/_utils/handleChange';
 import { selectedDay } from '@/app/_utils/selectedDay';
 import { useState } from 'react';
-import { DayPicker } from 'react-day-picker';
-import 'react-day-picker/dist/style.css';
 import {useToast} from '@chakra-ui/react'
 
 export default function AppointmentForm({ doctor }) {

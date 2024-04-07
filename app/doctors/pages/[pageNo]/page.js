@@ -1,9 +1,10 @@
 import Pagination from '@/app/_components/Pagination'
 import api_url from '@/app/_utils/apiurl'
+import randomParam from '@/app/_utils/randomParam'
 import React from 'react'
 
 async function getData(no) {
-    const res = await fetch(`${api_url}/api/doctor/page/${no}`)
+    const res = await fetch(`${api_url}/api/doctor/page/${no}?${randomParam}`)
 
     if (!res.ok) {
         throw new Error('Failed to fetch data')
