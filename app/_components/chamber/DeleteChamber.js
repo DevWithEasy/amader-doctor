@@ -1,6 +1,6 @@
 import { AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, useDisclosure } from "@chakra-ui/react"
-import useUserStore from "../../features/userStore"
-import { deleteChamber } from "../../utils/doctors_utils"
+import useUserStore from "../../_store/userStore"
+import { deleteChamber } from "../../_utils/doctors_utils"
 
 export default function DeleteChamber({ s_Chamber, deleteView, setDeleteView }) {
   const { onClose } = useDisclosure()

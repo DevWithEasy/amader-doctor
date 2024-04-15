@@ -14,32 +14,38 @@ export default function Layout({ children }) {
                 className='h-[calc(100vh-60px)] w-2/12 px-4 pt-4 border-r'
             >
                 <Link
-                    href={`/user/${id}/`}
+                    href={`/user/doctor/${id}`}
                     className={`block p-2 rounded ${pathname === id && 'bg-gray-100'}`}
                 >
                     প্রোফাইল
                 </Link>
                 <Link
-                    href={`/user/${id}/info`}
+                    href={`/user/doctor/${id}/info`}
                     className={`block p-2 rounded ${pathname === 'info' && 'bg-gray-100'}`}
                 >
                     ব্যক্তিগত তথ্য
                 </Link>
                 <Link
-                    href={`/user/${id}/appointments`}
+                    href={`/user/doctor/${id}/appointments`}
                     className={`block p-2 rounded ${pathname === 'appointments' && 'bg-gray-100'}`}
                 >
-                    অয়াপয়েন্টমেন্ট সমূহ
+                    অ্যাপয়েন্টমেন্ট
                 </Link>
                 <Link
-                    href={`/user/${id}/transections`}
+                    href={`/user/doctor/${id}/chambers`}
+                    className={`block p-2 rounded ${pathname === 'chambers' && 'bg-gray-100'}`}
+                >
+                    চেম্বার
+                </Link>
+                <Link
+                    href={`/user/doctor/${id}/transections`}
                     className={`block p-2 rounded ${pathname === 'transections' && 'bg-gray-100'}`}
                 >
-                    ট্রানজেকশন সমুহ
+                    ট্রানজেকশন
                 </Link>
             </div>
             <div
-                className='w-10/12 h-[calc(100vh-60px)] overflow-y-auto'
+                className='w-10/12 h-[calc(100vh-60px)] p-2 overflow-y-auto'
             >
                 {children}
             </div>

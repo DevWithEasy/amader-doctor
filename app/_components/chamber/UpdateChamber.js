@@ -1,3 +1,4 @@
+import api_url from '@/app/_utils/apiurl';
 import {
   Modal,
   ModalBody,
@@ -8,17 +9,27 @@ import {
   ModalOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
+import axios from "axios";
 import { useState } from "react";
-import { AiFillEdit } from "react-icons/ai";
-import useUserStore from "../../features/userStore";
-import { updateChamber } from "../../utils/doctors_utils";
-import handleChange from "../../utils/handleChange";
+import useUserStore from "../../_store/userStore";
+import handleChange from "../../_utils/handleChange";
 import Input from "../Input";
 
 export default function UpdateChamber({ s_Chamber, updateView, setUpdateView }) {
   const { onClose } = useDisclosure();
   const { reload } = useUserStore();
   const [value, setValue] = useState(s_Chamber);
+  async function updateChamber(){
+    const res = await axios.put(`${api_url}/api/doctor/updateChamber/${value._id}`,data,{
+        headers : {
+            authorization : 'Bearer ' + localStorage.getItem('accessToken')
+        }
+    })
+    if(res.data.status === 200){
+        reload()
+        onClose()
+    }
+}
 
   return (
     <>

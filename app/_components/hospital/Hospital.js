@@ -1,6 +1,4 @@
-import api_url from '@/app/_utils/apiurl'
-import { useRouter } from 'next/navigation'
-import Image from 'next/image'
+import getVanueTypeBangla from '@/app/_utils/vanueTypeBangla'
 import Link from 'next/link'
 
 export default function Hospital({ hospital }) {
@@ -16,11 +14,7 @@ export default function Hospital({ hospital }) {
                 <button
                     className='inline-block px-4 py-1 bg-blue-100 text-blue-600 text-sm rounded-full'
                 >
-                    {
-                        hospital?.type === 'hospital' ? 'হাসপাতাল' :
-                            hospital?.type === 'diagnostic' ? 'ডায়নোগষ্টিক সেন্টার ' :
-                                hospital?.type === 'clinic' ? 'ক্লিনিক ' : 'নিজস্ব চেম্বার'
-                    }
+                    {getVanueTypeBangla(hospital?.type)}
                 </button>
                 <div>
                     <p

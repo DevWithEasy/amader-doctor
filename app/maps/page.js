@@ -1,13 +1,23 @@
 'use client'
-import dynamic from 'next/dynamic'
 
-const DynamicMap = dynamic(() => import('../_components/map/MapView'), {
-  ssr: false
-})
+import { useState } from "react"
+import MapView from "../_components/map/MapView"
 
-
-export default function Maps(){
+export default function Maps() {
+  const [view,setView] = useState(false)
   return (
-    <DynamicMap/>
+    <div
+      className="h-[calc(100vh-60px)] flex justify-center items-center"
+    >
+      <button
+        onClick={()=>setView(!view)}
+        className="px-4 py-2 bg-red-500 text-white rounded"
+      >
+        Enable Location
+      </button>
+      {view &&
+        <MapView/>
+      }
+    </div>
   )
 }

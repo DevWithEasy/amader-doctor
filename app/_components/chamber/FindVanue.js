@@ -1,3 +1,5 @@
+import useServiceStore from "@/app/_store/serviceStore";
+import api_url from "@/app/_utils/apiurl";
 import {
     Modal,
     ModalBody,
@@ -8,8 +10,6 @@ import {
 } from "@chakra-ui/react";
 import axios from 'axios';
 import React, { useEffect } from 'react';
-import useServiceStore from '../../features/serviceStore';
-import api_url from '../../utils/apiUrl';
 
 const FindVanue = ({ setName, setValue, setLocation, vanue_view, setVanue_View, handleView }) => {
     const { hospitals, addHospitals } = useServiceStore()
@@ -52,12 +52,16 @@ const FindVanue = ({ setName, setValue, setLocation, vanue_view, setVanue_View, 
             >
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader
-                        className='font-bangla'
+                    <div
+                        className="px-6 py-2 flex justify-between items-center font-semibold"
                     >
-                        চেম্বার বাছাই করুন
-                    </ModalHeader>
-                    <ModalCloseButton onClick={() => setVanue_View(!vanue_view)} />
+                        <p>চেম্বার বাছাই করুন</p>
+                        <button 
+                        className="px-4 py-2"
+                        onClick={() => setVanue_View(!vanue_view)}>
+                            X
+                        </button>
+                    </div>
                     <ModalBody
                         className='font-bangla h-screen overflow-y-auto space-y-2'
                     >

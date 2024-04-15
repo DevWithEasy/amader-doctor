@@ -40,11 +40,8 @@ export default function HospitalDoctor({ chamber }) {
             >
                 <p className='text-lg font-semibold'>{doctor?.name}</p>
                 <p>{doctor?.education}</p>
-                <p>{doctor?.specialization}</p>
+                <p>{doctor?.specialization?.name}</p>
                 <p>{doctor?.experienceArea}</p>
-                {
-                    doctor?.designation && doctor?.workedAt && <p>{doctor?.designation} , {doctor?.workedAt}</p>
-                }
                 <p>সার্ভিস চার্জ - {doctor?.feesPerConsultation}</p>
                 <button
                     onClick={() => RouterContext.push(`/appointment_submit/${doctor?._id}`)}

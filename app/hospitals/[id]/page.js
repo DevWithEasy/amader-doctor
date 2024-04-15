@@ -7,6 +7,7 @@ import api_url from '@/app/_utils/apiurl'
 import HospitalDoctor from '@/app/_components/HospitalDoctor'
 import MapViewDirection from '@/app/_components/MapViewDirection'
 import useServiceStore from '@/app/_store/serviceStore'
+import getVanueTypeBangla from '@/app/_utils/vanueTypeBangla'
 
 export default function HospitalDetails() {
     const [view, setView] = useState(false)
@@ -34,11 +35,11 @@ export default function HospitalDetails() {
     useEffect(() => {
         getHospitalDoctors()
     }, [])
-    console.log(doctors)
+    
     return (
-        <div className='mx-2 md:w-10/12 md:mx-auto space-y-2 '>
+        <div className='space-y-2 '>
             <div
-                className='relative h-[350px] w-full flex justify-center items-center bg-white rounded-md'>
+                className='relative h-[350px] w-full flex justify-center items-center bg-blue-50 rounded-md'>
                 <div
                     className='flex flex-col items-center space-y-2'
                 >
@@ -47,9 +48,9 @@ export default function HospitalDetails() {
                     </h1>
                     <p>{hospital?.location}</p>
                     <p
-                        className='px-4 py-1 bg-green-500 text-white text-sm rounded-full'
+                        className='px-4 py-1 bg-blue-500 text-white text-sm rounded-full'
                     >
-                        {hospital?.type}
+                        {getVanueTypeBangla(hospital?.type)}
                     </p>
                     <div
                         className='flex items-center space-x-4 py-2'
@@ -73,7 +74,7 @@ export default function HospitalDetails() {
                     </div>
                     <button
                         onClick={()=>setView(!view)}
-                        className='px-4 py-2 border rounded'
+                        className='px-4 py-2 border border-blue-500 rounded'
                     >
                         আপনার দুরত্ব দেখুন
                     </button>
@@ -85,7 +86,7 @@ export default function HospitalDetails() {
                 <h3 className='p-2 text-center text-xl font-semibold border-b-4'>
                     ডাক্তারের তালিকা
                 </h3>
-                <div className='grid md:grid-cols-3 md:gap-4 space-y-3 md:space-y-0'>
+                <div className='mx-2 md:w-10/12 md:mx-auto grid md:grid-cols-3 md:gap-4 space-y-3 md:space-y-0'>
                     {doctors.length > 0 &&
                         doctors.map(doctor=>
                             <HospitalDoctor

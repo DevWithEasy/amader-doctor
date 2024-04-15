@@ -10,12 +10,12 @@ import {
 import axios from "axios"
 import { useState } from "react"
 import { toast } from 'react-hot-toast'
-import useUserStore from "../../features/userStore"
-import handleChange from "../../utils/handleChange"
 import Input from "../Input"
-import api_url from '../../utils/apiUrl'
+import api_url from '@/app/_utils/apiurl'
+import handleChange from '@/app/_utils/handleChange'
+import useUserStore from '@/app/_store/userStore'
 
-export default function AddHospitalByUser({setName, setLocation,setVanue,addVanue_view, setAddVanue_View,handleView}) {
+export default function AddHospitalByUser({ setName, setLocation, setVanue, addVanue_view, setAddVanue_View, handleView }) {
     const { reload } = useUserStore()
     const [value, setValue] = useState({
         name: '',
@@ -57,13 +57,19 @@ export default function AddHospitalByUser({setName, setLocation,setVanue,addVanu
             <Modal isOpen={addVanue_view}>
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader className='font-bangla'>
-                        নতুন সেবা প্রতিষ্ঠান যোগ করুন
-                    </ModalHeader>
-                    <ModalCloseButton onClick={()=>{
-                        setAddVanue_View(!addVanue_view),
-                        handleView('vanue')
-                    }}/>
+                    <div
+                        className="px-6 py-2 flex justify-between items-center font-semibold"
+                    >
+                        <p>নতুন সেবা প্রতিষ্ঠান যোগ করুন</p>
+                        <button
+                            className="px-4 py-2"
+                            onClick={() => {
+                                setAddVanue_View(!addVanue_view),
+                                    handleView('vanue')
+                            }}>
+                            X
+                        </button>
+                    </div>
                     <ModalBody>
                         <div className="p-2 space-y-2 font-bangla">
                             <Input {...{

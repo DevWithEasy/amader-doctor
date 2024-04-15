@@ -1,20 +1,36 @@
+import useUserStore from "@/app/_store/userStore";
+import api_url from '@/app/_utils/apiurl';
+import handleChange from "@/app/_utils/handleChange";
 import {
   Modal,
   ModalBody,
-  ModalCloseButton,
   ModalContent,
-  ModalHeader,
   ModalOverlay,
-  useDisclosure,
+  useDisclosure
 } from "@chakra-ui/react";
-import useUserStore from "../../features/userStore";
-import { addChamber } from "../../utils/doctors_utils";
-import handleChange from "../../utils/handleChange";
+import axios from "axios";
 import Input from "../Input";
 
 export default function AddChamber({ id, value, setValue, view, setView, name, location, handleView }) {
   const { onClose } = useDisclosure()
   const { reload } = useUserStore()
+
+  async function addChamber() {
+    try {
+      const res = await axios.post(`${api_url}/api/doctor/add_chamber/${id}`, value, {
+        headers: {
+          authorization: 'Bearer ' + localStorage.getItem('accessToken')
+        }
+      })
+
+      if (res.data.status === 200) {
+        reload()
+        setView(false)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <>
       <Modal isOpen={view}
@@ -22,8 +38,16 @@ export default function AddChamber({ id, value, setValue, view, setView, name, l
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader className='font-bangla'>তথ্য গুলো দিয়ে নতুন চেম্বার যোগ করুন </ModalHeader>
-          <ModalCloseButton onClick={() => setView(!view)} />
+          <div
+            className="px-6 py-2 flex justify-between items-center font-semibold"
+          >
+            <p>ননতুন চেম্বার যোগ করুন</p>
+            <button
+              className="px-4 py-2"
+              onClick={() => setView(!view)}>
+              X
+            </button>
+          </div>
           <ModalBody
             className='font-bangla'
           >
@@ -34,14 +58,16 @@ export default function AddChamber({ id, value, setValue, view, setView, name, l
               >
                 চেম্বারের স্থান খুঁজুন ও সিলেক্ট করুন
               </button>
-              <Input
-                label="হাসপাতাল / ক্লিনিক /ডায়ানগস্টিক নাম "
-                type="text"
-                // name="vanue"
-                c_value={name}
-                value={value}
-                setValue={setValue}
-              />
+              <div className=" space-y-1">
+                <label>হাসপাতাল / ক্লিনিক /ডায়ানগস্টিক নাম : </label>
+                <input
+                  type='text'
+                  onFocus={() => handleView('vanue')}
+                  value={name}
+                  onChange={()=>{}}
+                  className='w-full p-2 border rounded focus:outline-blue-500'
+                />
+              </div>
               <Input
                 label="ঠিকানা"
                 type="text"
@@ -107,7 +133,7 @@ export default function AddChamber({ id, value, setValue, view, setView, name, l
                   বন্ধ করুন
                 </button>
                 <button
-                  onClick={() => addChamber(id, value, reload, onClose)}
+                  onClick={addChamber}
                   className="py-2 px-6 bg-blue-500 text-white rounded-md"
                 >
                   সাবমিট দিন

@@ -80,7 +80,7 @@ const UserMenu = () => {
             className="text-black"
           >
             <Link
-              href="/appointments"
+              href={`/user/${user._id}/appointments`}
             >
               আপনার অ্যাপয়েন্টমেন্ট সমুহ
             </Link>
