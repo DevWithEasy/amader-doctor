@@ -5,9 +5,7 @@ import {
   ModalCloseButton,
   ModalContent,
   ModalFooter,
-  ModalHeader,
   ModalOverlay,
-  useDisclosure,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
@@ -16,28 +14,35 @@ import handleChange from "../../_utils/handleChange";
 import Input from "../Input";
 
 export default function UpdateChamber({ s_Chamber, updateView, setUpdateView }) {
-  const { onClose } = useDisclosure();
   const { reload } = useUserStore();
   const [value, setValue] = useState(s_Chamber);
-  async function updateChamber(){
-    const res = await axios.put(`${api_url}/api/doctor/updateChamber/${value._id}`,data,{
-        headers : {
-            authorization : 'Bearer ' + localStorage.getItem('accessToken')
+  async function updateChamber() {
+    try {
+      const res = await axios.put(`${api_url}/api/doctor/updateChamber/${value._id}`, data, {
+        headers: {
+          authorization: 'Bearer ' + localStorage.getItem('accessToken')
         }
-    })
-    if(res.data.status === 200){
+      })
+      if (res.data.status === 200) {
         reload()
-        onClose()
+        setUpdateView(false)
+      }
+    } catch (error) {
+        console.log(error)
     }
-}
+  }
 
   return (
     <>
       <Modal isOpen={updateView}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader className="font-bangla">চেম্বার আপডেট</ModalHeader>
-          <ModalCloseButton onClick={() => setUpdateView(!updateView)} />
+          <div
+            className="px-6 pt-3 flex justify-between items-center font-semibold"
+          >
+            <p>চেম্বার আপডেট</p>
+            <button onClick={() => setUpdateView(false)}>X</button>
+          </div>
           <ModalBody>
             <div className="p-2 space-y-2 font-bangla">
               <Input

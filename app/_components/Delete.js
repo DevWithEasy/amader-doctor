@@ -6,7 +6,6 @@ import {
     AlertDialogHeader,
     AlertDialogContent,
     AlertDialogOverlay,
-    AlertDialogCloseButton,
 } from '@chakra-ui/react'
 import useUserStore from "../_store/userStore"
 import api_url from "../_utils/apiurl"

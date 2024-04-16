@@ -41,7 +41,7 @@ export default function AddChamber({ id, value, setValue, view, setView, name, l
           <div
             className="px-6 py-2 flex justify-between items-center font-semibold"
           >
-            <p>ননতুন চেম্বার যোগ করুন</p>
+            <p>নতুন চেম্বার যোগ করুন</p>
             <button
               className="px-4 py-2"
               onClick={() => setView(!view)}>
@@ -54,7 +54,7 @@ export default function AddChamber({ id, value, setValue, view, setView, name, l
             <div className="p-2 space-y-2">
               <button
                 onClick={() => handleView('vanue')}
-                className='w-full p-2 bg-gray-50 border rounded focus:outline-none focus:ring-2'
+                className='w-full p-2 bg-blue-100 border rounded focus:outline-none focus:ring-2'
               >
                 চেম্বারের স্থান খুঁজুন ও সিলেক্ট করুন
               </button>

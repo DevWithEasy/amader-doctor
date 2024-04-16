@@ -3,7 +3,7 @@ import { useState } from "react";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import dayNameBangla from "../../_utils/dayNameBangla";
 import formatTime from "../../_utils/formatTime";
-import DeleteChamber from "./DeleteChamber";
+import Delete from "../Delete";
 import UpdateChamber from "./UpdateChamber";
 export default function ChamberList({ chambers }) {
   const [updateView, setUpdateView] = useState(false)
@@ -82,7 +82,7 @@ export default function ChamberList({ chambers }) {
         }} />
       }
       {deleteView &&
-        <DeleteChamber {...{
+        <Delete {...{
           s_Chamber,
           deleteView, setDeleteView
         }} />
