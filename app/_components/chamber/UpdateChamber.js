@@ -2,7 +2,6 @@ import api_url from '@/app/_utils/apiurl';
 import {
   Modal,
   ModalBody,
-  ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalOverlay,
@@ -12,20 +11,22 @@ import { useState } from "react";
 import useUserStore from "../../_store/userStore";
 import handleChange from "../../_utils/handleChange";
 import Input from "../Input";
+import useServiceStore from '@/app/_store/serviceStore';
 
-export default function UpdateChamber({ s_Chamber, updateView, setUpdateView }) {
-  const { reload } = useUserStore();
-  const [value, setValue] = useState(s_Chamber);
+export default function UpdateChamber({ chamber, updateView, setUpdateView }) {
+  const { addChambers } = useServiceStore();
+  const [value, setValue] = useState(chamber);
   async function updateChamber() {
     try {
-      const res = await axios.put(`${api_url}/api/doctor/updateChamber/${value._id}`, data, {
+      const res = await axios.put(`${api_url}/api/chamber/${value._id}`, value, {
         headers: {
           authorization: 'Bearer ' + localStorage.getItem('accessToken')
         }
       })
       if (res.data.status === 200) {
-        reload()
+        addChambers(res.data.data)
         setUpdateView(false)
+        console.log(res.data.data)
       }
     } catch (error) {
         console.log(error)
@@ -122,7 +123,7 @@ export default function UpdateChamber({ s_Chamber, updateView, setUpdateView }) 
               বাতিল
             </button>
             <button
-              onClick={() => updateChamber(doctor._id, value, reload, onClose)}
+              onClick={updateChamber}
               className="py-2 px-6 bg-blue-500 text-white rounded-md"
             >
               সাবমিট

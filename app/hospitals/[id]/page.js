@@ -24,6 +24,7 @@ export default function HospitalDetails() {
                 }
             })
             if (res.data.success) {
+                console.log(res.data)
                 setDoctors(res.data.data)
             }
         } catch (error) {

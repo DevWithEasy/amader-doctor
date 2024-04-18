@@ -8,7 +8,7 @@ import UpdateChamber from "./UpdateChamber";
 export default function ChamberList({ chambers }) {
   const [updateView, setUpdateView] = useState(false)
   const [deleteView, setDeleteView] = useState(false)
-  const [s_Chamber, setS_Chamber] = useState(null)
+  const [chamber, setChamber] = useState(null)
   
   return (
     <div className="relative overflow-x-auto">
@@ -58,14 +58,14 @@ export default function ChamberList({ chambers }) {
                 <td className="p-2 flex justify-center items-center text-center space-x-2">
                   <AiFillEdit
                     onClick={() => {
-                      setS_Chamber(chamber)
+                      setChamber(chamber)
                       setUpdateView(!updateView)
                     }}
                     className="cursor-pointer text-blue-500"
                   />
                   <AiFillDelete
                     onClick={() => {
-                      setS_Chamber(chamber)
+                      setChamber(chamber)
                       setDeleteView(!deleteView)
                     }}
                     className="cursor-pointer text-red-500"
@@ -77,13 +77,13 @@ export default function ChamberList({ chambers }) {
       </table>
       {updateView &&
         <UpdateChamber {...{
-          s_Chamber,
+          chamber,
           updateView, setUpdateView
         }} />
       }
       {deleteView &&
         <Delete {...{
-          s_Chamber,
+          path : `chamber/${chamber._id}`,
           deleteView, setDeleteView
         }} />
       }

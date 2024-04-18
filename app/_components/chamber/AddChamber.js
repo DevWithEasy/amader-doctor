@@ -12,12 +12,11 @@ import axios from "axios";
 import Input from "../Input";
 
 export default function AddChamber({ id, value, setValue, view, setView, name, location, handleView }) {
-  const { onClose } = useDisclosure()
   const { reload } = useUserStore()
 
   async function addChamber() {
     try {
-      const res = await axios.post(`${api_url}/api/doctor/add_chamber/${id}`, value, {
+      const res = await axios.post(`${api_url}/api/chamber/${id}`, value, {
         headers: {
           authorization: 'Bearer ' + localStorage.getItem('accessToken')
         }

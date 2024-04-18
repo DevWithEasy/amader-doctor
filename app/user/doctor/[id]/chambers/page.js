@@ -14,8 +14,8 @@ import axios from 'axios'
 
 export default function Chambers() {
     const { id } = useParams()
-    const { random } = useUserStore()
-    const { process, processing, chambers, addChambers } = useServiceStore()
+    const {random} = useUserStore()
+    const { chambers, addChambers } = useServiceStore()
     const [view, setView] = useState(false)
     const [vanue_view, setVanue_View] = useState(false)
     const [addVanue_view, setAddVanue_View] = useState(false)
@@ -59,9 +59,8 @@ export default function Chambers() {
 
     }
     useEffect(() => {
-
         getAllChambers()
-    }, [])
+    }, [random])
 
     return (
         <div
