@@ -5,17 +5,23 @@ const userStore = (set) => ({
     isAuth: false,
     user: {},
     notifications : [],
+    appointments : [],
     random: 0,
     addUser: (user) => {
-        set((state) => ({
+        set(() => ({
             isAuth: true,
             user: user,
             notifications : user.notifications
         }))
     },
     addDoctors: (doctors) => {
-        set((state) => ({
+        set(() => ({
             doctors: doctors
+        }))
+    },
+    addAppointments : (data)=>{
+        set(() => ({
+            appointments : data
         }))
     },
     addNotifications: (notifications) => {

@@ -4,8 +4,8 @@ import AppointmentStatusBangla from '@/app/_utils/AppointmentStatusBangla';
 import { toBengaliNumber } from 'bengali-number';
 import { toast } from 'react-hot-toast';
 
-const AppointmentsTableView = ({ appointments,setAppointments, setView, setId }) => {
-    const { user } = useUserStore()
+const AppointmentsTableView = ({type, setView, setId }) => {
+    const { user,appointments,addAppointments } = useUserStore()
 
     return (
 
@@ -35,32 +35,39 @@ const AppointmentsTableView = ({ appointments,setAppointments, setView, setId })
                     </tr>
                 </thead>
                 <tbody>
-                    {appointments && appointments.map((appointment, i) => <tr key={appointment._id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <td className="px-4 py-2">
-                            {toBengaliNumber(appointment?.appointmentId)}
-                        </td>
-                        <td className="px-6 py-2">
-                            {appointment?.patientName}
-                        </td>
-                        <td className="px-6 py-2">
-                            {appointment?.address}
-                        </td>
-                        <td className="px-6 py-2 text-center">
-                            {dayNameBangla(appointment?.appointmentDay)}
-                        </td>
-                        <td className={`px-6 py-2 text-center ${statusColor(appointment?.status)}`}>
-                            {AppointmentStatusBangla(appointment?.status)}
-                        </td>
-                        <td className="flex space-x-2 justify-center px-6 py-2">
-                            <button
-                                onClick={() => { setId(appointment?._id); setView(true) }}
-                                className="px-2 py-1 bg-green-500 text-white rounded hover:bg-green-500"
-                            >
-                                বিস্তারিত
-                            </button>
-                            <button onClick={() => cancelAppointment(appointment._id, user, toast,setAppointments)} className="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-500">বাতিল</button>
-                        </td>
-                    </tr>)}
+                    {appointments && 
+                    appointments.filter(
+                        appoint => 
+                        type ==='complete' ? appoint.status==='Confirmed' || appoint.status==='Pending' : appoint.status === 'Canceled' || appoint.status==='Completed'
+                    )
+                    .map((appointment) => 
+                        <tr key={appointment._id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <td className="px-4 py-2">
+                                {toBengaliNumber(appointment?.appointmentId)}
+                            </td>
+                            <td className="px-6 py-2">
+                                {appointment?.patientName}
+                            </td>
+                            <td className="px-6 py-2">
+                                {appointment?.address}
+                            </td>
+                            <td className="px-6 py-2 text-center">
+                                {dayNameBangla(appointment?.appointmentDay)}
+                            </td>
+                            <td className={`px-6 py-2 text-center ${statusColor(appointment?.status)}`}>
+                                {AppointmentStatusBangla(appointment?.status)}
+                            </td>
+                            <td className="flex space-x-2 justify-center px-6 py-2">
+                                <button
+                                    onClick={() => { setId(appointment?._id); setView(true) }}
+                                    className="px-2 py-1 bg-green-500 text-white rounded hover:bg-green-500"
+                                >
+                                    বিস্তারিত
+                                </button>
+                                <button onClick={() => cancelAppointment(appointment._id, user, toast,addAppointments)} className="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-500">বাতিল</button>
+                            </td>
+                        </tr>
+                    )}
                 </tbody>
             </table>
         </div>

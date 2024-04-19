@@ -70,7 +70,7 @@ const UserMenu = () => {
               className="text-black"
             >
               <Link
-                href="/doctors/appointments"
+                href={`/user/doctor/${user._id}/appointments`}
               >
                 অ্যাপয়েন্টমেন্ট সমুহ
               </Link>
@@ -88,7 +88,7 @@ const UserMenu = () => {
           </MenuItem>
           <MenuItem>
             <Link
-              href="/payment/add"
+              href={`/user/${user._id}/transections/add`}
             >
               ব্যালেন্স যোগ করুন
             </Link>

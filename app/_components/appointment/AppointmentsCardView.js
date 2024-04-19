@@ -4,8 +4,8 @@ import AppointmentStatusBangla from '@/app/_utils/AppointmentStatusBangla';
 import { toBengaliNumber } from 'bengali-number';
 import { toast } from 'react-hot-toast';
 
-const AppointmentsCardView = ({ appointments,setAppointments, setView, setId }) => {
-    const { user } = useUserStore()
+const AppointmentsCardView = ({ type,setView, setId }) => {
+    const { user,appointments } = useUserStore()
     return (
         <div
             className='md:hidden m-2 space-y-2'

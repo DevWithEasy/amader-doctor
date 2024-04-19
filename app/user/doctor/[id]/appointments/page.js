@@ -23,8 +23,8 @@ export default function Appointments() {
             >
                 <Tabs variant='enclosed'>
                     <TabList>
-                        <Tab>অপেক্ষমাণ রয়েছে</Tab>
-                        <Tab>সম্পন্ন হয়েছে</Tab>
+                        <Tab onClick={()=>setType('uncomplete')}>অপেক্ষমাণ রয়েছে</Tab>
+                        <Tab onClick={()=>setType('complete')}>সম্পন্ন হয়েছে</Tab>
                     </TabList>
                     <TabPanels>
                         <TabPanel>

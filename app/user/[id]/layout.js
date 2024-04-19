@@ -37,6 +37,12 @@ export default function Layout({ children }) {
                 >
                     ট্রানজেকশন সমুহ
                 </Link>
+                <Link
+                    href={`/user/${id}/transections/add`}
+                    className={`block p-2 rounded ${pathname === 'add' && 'bg-gray-100'}`}
+                >
+                    ব্যালেন্স যোগ
+                </Link>
             </div>
             <div
                 className='w-10/12 h-[calc(100vh-60px)] overflow-y-auto'

@@ -3,39 +3,80 @@ import AppointmentsCardView from "@/app/_components/appointment/AppointmentsCard
 import AppointmentsTableView from "@/app/_components/appointment/AppointmentsTableView";
 import AppointmentDetails from "@/app/_components/AppointmentDeatils";
 import useUserStore from "@/app/_store/userStore";
-import { getAllAppointments } from "@/app/_utils/appoimtments_utils";
+import api_url from "@/app/_utils/apiurl";
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Appointments() {
+    const { id } = useParams()
+    const [type, setType] = useState('complete')
     const [view, setView] = useState(false)
-    const { user } = useUserStore()
-    const [id, setId] = useState('')
-    const [appointments, setAppointments] = useState([])
+    const { addAppointments } = useUserStore()
+    const [selectId, setSelectId] = useState('')
+
+    async function getAllAppointments() {
+        try {
+            const res = await axios.get(`${api_url}/api/appointment/all/${id}`, {
+                headers: {
+                    authorization: 'Bearer ' + localStorage.getItem('accessToken')
+                }
+            });
+            addAppointments(res.data.data);
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     useEffect(() => {
-        getAllAppointments(user?._id, setAppointments)
-    }, [user?._id])
+        getAllAppointments()
+    }, [])
 
     return (
-        <div className="w-full space-y-2">
-            <h1 className="p-2 text-xl font-semibold text-center border-b">আপনার অ্যাপয়েন্টমেন্ট গুলো</h1>
-            <AppointmentsTableView {...{
-                appointments,
-                setAppointments,
-                setId,
-                setView
-            }} />
+        <div className="w-full space-y-2 p-2">
+            <h1 className="text-xl font-semibold text-center">আপনার অ্যাপয়েন্টমেন্ট গুলো</h1>
+            <div
+                className=''
+            >
+                <Tabs variant='enclosed'>
+                    <TabList>
+                        <Tab onClick={() => setType('uncomplete')}>অপেক্ষমাণ রয়েছে</Tab>
+                        <Tab onClick={() => setType('complete')}>সম্পন্ন হয়েছে</Tab>
+                    </TabList>
+                    <TabPanels>
+                        <TabPanel>
+                            <AppointmentsTableView {...{
+                                type,
+                                setId: setSelectId,
+                                setView
+                            }} />
 
-            <AppointmentsCardView {...{
-                appointments,
-                setAppointments,
-                setId,
-                setView
-            }} />
+                            <AppointmentsCardView {...{
+                                type,
+                                setId: setSelectId,
+                                setView
+                            }} />
+                        </TabPanel>
+                        <TabPanel>
+                            <AppointmentsTableView {...{
+                                type,
+                                setId: setSelectId,
+                                setView
+                            }} />
+
+                            <AppointmentsCardView {...{
+                                type,
+                                setId: setSelectId,
+                                setView
+                            }} />
+                        </TabPanel>
+                    </TabPanels>
+                </Tabs>
+            </div>
 
             {view &&
                 <AppointmentDetails {...{
-                    id,
+                    id: selectId,
                     view,
                     setView
                 }} />
