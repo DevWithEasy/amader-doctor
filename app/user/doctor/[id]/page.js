@@ -29,7 +29,7 @@ export default function Doctor() {
   useEffect(() => {
     async function getDoctor() {
       try {
-        const res = await axios.get(`${api_url}/api/doctor/find/${id}`, {
+        const res = await axios.get(`${api_url}/api/doctor/find/profile/${id}`, {
           headers: {
             authorization: 'Bearer ' + localStorage.getItem('accessToken')
           }

@@ -7,7 +7,7 @@ import Link from 'next/link'
 
 async function getData(id) {
   const randomParam = Math.random().toString(36).substring(7);
-  const res = await fetch(`${api_url}/api/doctor/find/${id}?${randomParam}`)
+  const res = await fetch(`${api_url}/api/doctor/${id}?${randomParam}`)
 
   if (!res.ok) {
     throw new Error('Failed to fetch data')
@@ -17,7 +17,7 @@ async function getData(id) {
 
 export default async function Doctor({ params }) {
   const { data: { doctor, doctors } } = await getData(params.id)
-  
+  console.log(doctor)
   return (
     <div
       className="w-10/12 mx-auto pt-5 flex justify-between space-x-5"
@@ -76,11 +76,13 @@ export default async function Doctor({ params }) {
           className="p-4 border rounded"
         >
           <p
-            className="font-semibold"
+            className="text-xl font-semibold"
           >
             ডাক্তারের সমন্ধে বিস্তারিতঃ
           </p>
-
+          {doctor?.bio &&
+            <div dangerouslySetInnerHTML={{__html : doctor?.bio}}></div>
+          }
         </div>
       </div>
       <div

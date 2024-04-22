@@ -4,8 +4,8 @@ import api_url from "@/app/_utils/apiurl"
 import Image from 'next/image'
 
 async function getData(id) {
-  const res = await fetch(`${api_url}/api/doctor/find/${id}`)
-
+  const res = await fetch(`${api_url}/api/doctor/find/appointment/${id}`)
+  
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
