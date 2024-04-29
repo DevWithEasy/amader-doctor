@@ -1,10 +1,13 @@
 import AppoinmentChamberList from "@/app/_components/appointment/AppoinmentChamberList"
 import AppointmentForm from "@/app/_components/appointment/AppointmentForm"
 import api_url from "@/app/_utils/apiurl"
+import find_image_url from "@/app/_utils/find_image_url";
+import { toBengaliNumber } from "bengali-number";
 import Image from 'next/image'
 
 async function getData(id) {
-  const res = await fetch(`${api_url}/api/doctor/find/appointment/${id}`)
+  const randomParam = Math.random().toString(36).substring(7);
+  const res = await fetch(`${api_url}/api/doctor/find/appointment/${id}?${randomParam}`)
   
   if (!res.ok) {
     throw new Error('Failed to fetch data')
@@ -14,7 +17,7 @@ async function getData(id) {
 
 export default async function AppointmentSubmit({ params }) {
   const { data } = await getData(params.id)
-
+  
   return (
     <main>
       <div
@@ -23,7 +26,7 @@ export default async function AppointmentSubmit({ params }) {
       <div className='w-1/2'>
         <div className='flex space-x-4 p-2 pt-2 bg-white rounded'>
           <Image
-            src={`${api_url}/${data?.user?.image?.url}`}
+            src={find_image_url(data.user)}
             alt=""
             width={96}
             height={96}
@@ -34,7 +37,7 @@ export default async function AppointmentSubmit({ params }) {
             <p className="text-blue-500">{data?.specialization?.name}</p>
             <p>{data?.education}</p>
             <p>{data?.experienceArea}</p>
-            <p>সার্ভিস চার্জ - {data?.feesPerConsultation}</p>
+            <p>সার্ভিস চার্জ - {toBengaliNumber(data?.feesPerConsultation)} টাকা</p>
           </div>
         </div>
         {data?.chambers && <AppoinmentChamberList chambers={data.chambers} />}
@@ -42,7 +45,7 @@ export default async function AppointmentSubmit({ params }) {
       <div
         className="w-1/2"
       >
-        <AppointmentForm {...{doctor : {}}}/>
+        <AppointmentForm {...{doctor : data}}/>
       </div>
     </div>
     </main>

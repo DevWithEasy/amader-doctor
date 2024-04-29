@@ -2,8 +2,10 @@ import api_url from "@/app/_utils/apiurl";
 import Image from "next/image";
 import Link from "next/link";
 import { toBengaliNumber } from 'bengali-number'
+import find_image_url from "@/app/_utils/find_image_url";
 
 export default function Doctor({ doctor }) {
+    console.log(doctor)
     return (
         <div
             key={doctor._id}
@@ -13,7 +15,7 @@ export default function Doctor({ doctor }) {
                 href={`/doctors/${doctor?._id}`}
             >
                 <Image
-                    src={`${api_url}/${doctor?.user?.image?.url}`}
+                    src={find_image_url(doctor.user)}
                     alt=""
                     width={200}
                     height={50}

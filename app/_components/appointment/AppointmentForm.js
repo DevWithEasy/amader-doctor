@@ -4,6 +4,7 @@ import handleChange from '@/app/_utils/handleChange';
 import { selectedDay } from '@/app/_utils/selectedDay';
 import { useState } from 'react';
 import {useToast} from '@chakra-ui/react'
+import dayNameBangla from '@/app/_utils/dayNameBangla';
 
 export default function AppointmentForm({ doctor }) {
     const toast = useToast()
@@ -20,7 +21,7 @@ export default function AppointmentForm({ doctor }) {
         appointmentDay: '',
         appointmentDate: '',
     })
-
+    console.log(chamber)
     return (
         <div>
             <div className='w-full bg-white rounded-md'>
@@ -58,6 +59,16 @@ export default function AppointmentForm({ doctor }) {
                             সাবমিট করুন
                         </button>
                     </div>
+
+                    {chamber?._id &&
+                        <div
+                            className='inline-block p-2 border rounded'
+                        >
+                            <p className="text-blue-500">{chamber?.vanue?.name}</p>
+                            <p>{chamber.vanue.location}</p>
+                            <p>{dayNameBangla(chamber.day)}</p>
+                        </div>
+                    }
                 </div>
             </div>
 

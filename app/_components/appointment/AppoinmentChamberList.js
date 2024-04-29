@@ -1,26 +1,29 @@
 import dayNameBangla from "@/app/_utils/dayNameBangla";
+import formatTime from "@/app/_utils/formatTime";
+import { toBengaliNumber } from "bengali-number";
 
 export default function AppoinmentChamberList({ chambers }) {
   return (
-    <div className="overflow-x-auto z-0 bg-white p-2 rounded-md">
+    <div className="p-2 space-y-3">
+      <p className="font-semibold">চেম্বার সমূহঃ</p>
       <div
-        className="md:hidden"
+        className="space-y-2"
       >
         {
           chambers.map(chamber=>
           <div
             key={chamber._id}
-            className='p-2 border-b'
+            className='p-2 border'
           >
-            <p>স্থানঃ {chamber.vanue}</p>
-            <p>ঠিকানাঃ {chamber.location}</p>
-            <p>সবোর্চ্চ অ্যাপয়েন্টমেন্টঃ {chamber.appointment_limit}</p>
-            <p>প্রতি {dayNameBangla(chamber.day)}, {chamber.from} হতে {chamber.to}</p>
+            <p className="text-blue-500">স্থানঃ {chamber.vanue.name}</p>
+            <p>ঠিকানাঃ {chamber.vanue.location}</p>
+            <p>সবোর্চ্চ অ্যাপয়েন্টমেন্টঃ {toBengaliNumber(chamber.limit)}</p>
+            <p>প্রতি {dayNameBangla(chamber.day)}, {formatTime(chamber.from)} হতে {formatTime(chamber.to)}</p>
           </div>
           )
         }
       </div>
-      <table className="hidden md:block w-full text-left text-gray-500 dark:text-gray-400">
+      {/* <table className="hidden md:block w-full text-left text-gray-500 dark:text-gray-400">
         <thead className="text-sm text-blue-500 uppercase bg-blue-50">
           <tr>
             <td className="px-6 py-3">
@@ -30,7 +33,7 @@ export default function AppoinmentChamberList({ chambers }) {
               ঠিকানা
             </td>
             <td className="px-6 py-3 text-center">
-              সর্বোচ্চ অ্যাপয়েন্টমেন্ট
+              সর্বোচ্চ
             </td>
             <td className="px-6 py-3 text-center">
               বার
@@ -49,16 +52,16 @@ export default function AppoinmentChamberList({ chambers }) {
               key={i}
               className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
             >
-              <td className="px-6 py-4">{chamber.vanue}</td>
-              <td className="px-6 py-4">{chamber.location}</td>
-              <td className="px-6 py-4">{chamber.appointment_limit}</td>
+              <td className="px-6 py-4 text-nowrap">{chamber.vanue.name}</td>
+              <td className="px-6 py-4 text-nowrap">{chamber.vanue.location}</td>
+              <td className="px-6 py-4 text-center">{chamber.limit}</td>
               <td className="px-6 py-4">{dayNameBangla(chamber.day)}</td>
               <td className="px-6 py-4">{chamber.from}</td>
               <td className="px-6 py-4">{chamber.to}</td>
             </tr>
           ))}
         </tbody>
-      </table>
+      </table> */}
     </div>
   );
 }
