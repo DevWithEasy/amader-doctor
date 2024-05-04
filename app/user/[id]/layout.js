@@ -45,7 +45,7 @@ export default function Layout({ children }) {
                 </Link>
             </div>
             <div
-                className='h-[calc(100vh-60px)] md:w-10/12 w-full overflow-y-auto'
+                className='h-[calc(100vh-60px)] md:w-10/12 w-full pb-10 overflow-y-auto'
             >
                 {children}
             </div>

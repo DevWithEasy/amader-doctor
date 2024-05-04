@@ -45,6 +45,7 @@ const serviceStore = (set) => ({
             specialists: [],
             doctors: [],
             users: [],
+            chambers : [],
         }))
     },
 })

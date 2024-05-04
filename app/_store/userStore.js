@@ -62,6 +62,7 @@ const userStore = (set) => ({
             isAuth: false,
             user: {},
             notifications : [],
+            appointments : []
         }))
     },
     reload: () => {

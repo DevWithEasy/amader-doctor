@@ -80,6 +80,18 @@ const ProfileNavigation = () => {
                     </span>
                 </div>
             </Link>
+            <Link
+                href={`/user/doctor/${user?._id}/`}
+                className="h-[50px] w-[40px] flex flex-col justify-center items-center bg-white hover:-translate-y-3 transition-all duration-500 rounded-full"
+            >
+                <Image
+                    src='/image/nav_doctor.png'
+                    alt="home"
+                    height={20}
+                    width={20}
+                />
+                <span className="text-sm">ডাক্তার</span>
+            </Link>
         </div>
     );
 };

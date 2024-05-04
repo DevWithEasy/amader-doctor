@@ -34,7 +34,7 @@ const UserNavigatation = () => {
                 <span className="text-sm">খুঁজুন</span>
             </Link>
             <Link
-                href={`/`}
+                href={`/doctors`}
                 className="h-[50px] w-[40px] flex flex-col justify-center items-center bg-white hover:-translate-y-3 transition-all duration-500 rounded-full"
             >
                 <Image
@@ -46,44 +46,41 @@ const UserNavigatation = () => {
                 <span className="text-sm">ডাক্তার</span>
             </Link>
             <Link
-                href={`/`}
+                href={`/hospitals`}
                 className="h-[50px] w-[40px] flex flex-col justify-center items-center bg-white hover:-translate-y-3 transition-all duration-500 rounded-full"
             >
                 <Image
-                    src='/image/nav_more.png'
+                    src='/image/nav_hospital.png'
                     alt="home"
                     height={20}
                     width={20}
                 />
-                <span className="text-sm">আরো</span>
+                <span className="text-sm">হাসপাতাল</span>
             </Link>
-            {!isAuth ?
-                <Link
-                    href={`/user/signin`}
+            <Link
+                    href={`/ambulances`}
                     className="h-[50px] w-[40px] flex flex-col justify-center items-center bg-white hover:-translate-y-3 transition-all duration-500 rounded-full"
                 >
                     <Image
-                        src='/image/nav_login.png'
+                        src='/image/nav_ambulance.png'
                         alt="home"
                         height={20}
                         width={20}
                     />
-                    <span className="text-sm">লগ-ইন</span>
+                    <span className="text-sm">এম্বুল্যান্স</span>
                 </Link>
-                :
                 <Link
-                    href={`/user/${user?._id}`}
+                    href={`/ambulances`}
                     className="h-[50px] w-[40px] flex flex-col justify-center items-center bg-white hover:-translate-y-3 transition-all duration-500 rounded-full"
                 >
                     <Image
-                        src={user?.image?.url ? `${api_url}/${user?.image?.url}` : '/image/user.png'}
+                        src='/image/nav_more.png'
                         alt="home"
                         height={20}
                         width={20}
                     />
-                    <span className="text-sm">প্রোফাইল</span>
+                    <span className="text-sm">আরো</span>
                 </Link>
-            }
         </div>
     );
 };

@@ -6,9 +6,10 @@ import Link from 'next/link'
 import api_url from "@/app/_utils/apiurl";
 import UserNavigatation from "./UserNavigatation";
 import ProfileNavigation from "./ProfileNavigation";
+import DoctorNavigation from "./DoctorNavigation";
 
 const Footer = () => {
-    const { isAuth, user } = useUserStore()
+    const { user } = useUserStore()
     const path = usePathname()
     const user_path = `/user/${user?._id}`
     const doctor_path = `/user/doctor/${user?._id}`
@@ -25,7 +26,7 @@ const Footer = () => {
                     <ProfileNavigation/>
                     :
                     doctor_pathname === doctor_path ?
-                        <div>doctor</div>
+                        <DoctorNavigation/>
                         :
                         <UserNavigatation/>
             }

@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import IsUser from "./IsUser"
-import UserMenu from './UserMenu'
 
 const Header = () => {
     return (
@@ -42,8 +41,9 @@ const Header = () => {
                 >
                     ম্যাপ
                 </Link>
-                <IsUser />
+                
             </div>
+            <IsUser />
         </div>
     )
 }

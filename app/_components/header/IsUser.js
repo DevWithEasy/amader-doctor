@@ -5,6 +5,7 @@ import UserMenu from './UserMenu'
 
 export default function IsUser() {
     const { isAuth } = useUserStore()
+
     return (
         <div className="flex justify-end items-center space-x-3">
             {!isAuth ?
@@ -12,10 +13,10 @@ export default function IsUser() {
                     href="/user/signin"
                     className="px-4 py-2 bg-white text-blue-500 text-nowrap trasition-all duration-300 rounded"
                 >
-                    প্রবেশ করুন
+                    লগ-ইন
                 </Link>
                 :
-                <UserMenu/>
+                <UserMenu />
             }
 
         </div>

@@ -5,7 +5,7 @@ import { toBengaliNumber } from 'bengali-number'
 import find_image_url from "@/app/_utils/find_image_url";
 
 export default function Doctor({ doctor }) {
-    console.log(doctor)
+    
     return (
         <div
             key={doctor._id}
