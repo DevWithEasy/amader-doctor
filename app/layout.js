@@ -1,6 +1,7 @@
 import Header from "@/app/_components/header/Header"
 import "./globals.css"
 import { Providers } from "./providers"
+import Footer from "./_components/footer/Footer";
 
 export const metadata = {
   title: "Amader Doctor - Doctor Appoinment Solution",
@@ -14,6 +15,7 @@ export default function RootLayout({ children }) {
         <Providers>
           <Header />
           {children}
+          <Footer/>
         </Providers>
       </body>
     </html>

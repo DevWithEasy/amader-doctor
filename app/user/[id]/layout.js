@@ -11,7 +11,7 @@ export default function Layout({ children }) {
             className='h-[calc(100vh-60px)] flex justify-between'
         >
             <div
-                className='h-[calc(100vh-60px)] w-2/12 px-4 pt-4 border-r'
+                className='hidden md:block h-[calc(100vh-60px)] w-2/12 px-4 pt-4 border-r'
             >
                 <Link
                     href={`/user/${id}/`}
@@ -45,7 +45,7 @@ export default function Layout({ children }) {
                 </Link>
             </div>
             <div
-                className='w-10/12 h-[calc(100vh-60px)] overflow-y-auto'
+                className='h-[calc(100vh-60px)] md:w-10/12 w-full overflow-y-auto'
             >
                 {children}
             </div>

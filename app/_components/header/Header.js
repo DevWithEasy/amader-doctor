@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import HeaderMenu from "./HeaderMenu"
 import IsUser from "./IsUser"
 import UserMenu from './UserMenu'
 
@@ -44,12 +43,6 @@ const Header = () => {
                     ম্যাপ
                 </Link>
                 <IsUser />
-            </div>
-            <div
-                className="flex items-center space-x-2 md:hidden"
-            >
-                <UserMenu/>
-                <HeaderMenu />
             </div>
         </div>
     )

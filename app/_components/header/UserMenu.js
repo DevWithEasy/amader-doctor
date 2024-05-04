@@ -7,22 +7,42 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 const UserMenu = () => {
-  const {  user,removeUser } = useUserStore()
-  const {removeData} = useServiceStore()
-  const handleLogout=()=>{
+  const { user, removeUser, notifications } = useUserStore()
+  const { removeData } = useServiceStore()
+  const handleLogout = () => {
     removeUser()
     removeData()
   }
   return (
     <Menu>
       <MenuButton>
-        <Image
-          src={user?.image?.url ? `${api_url}/${user?.image?.url}` : '/image/user.png'}
-          alt="user_image"
-          height={30}
-          width={30}
-          className="rounded-full"
-        />
+        <div
+          className="relative w-[30px] h-[30px]"
+        >
+          <Image
+            src={user?.image?.url ? `${api_url}/${user?.image?.url}` : '/image/user.png'}
+            alt="user_image"
+            height={30}
+            width={30}
+            className="rounded-full"
+          />
+          {
+            notifications?.length > 0 &&
+            <div
+              className="absolute flex justify-center items-center h-5 w-5 bg-white text-red-500 rounded-full text-xs text-nowrap -right-3 -bottom-3"
+            >
+              <span>
+                {
+                  notifications.filter(
+                    (notification) => notification.status === false
+                  ).length
+                }
+              </span>
+            </div>
+          }
+
+        </div>
+
       </MenuButton>
       <MenuList className="text-black px-2">
         <MenuGroup title="প্রোফাইল">
@@ -31,6 +51,26 @@ const UserMenu = () => {
               href={`/user/${user?._id}`}
             >
               আমার প্রোফাইল
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link
+              href={`/user/${user._id}/notifications`}
+              className="w-full flex justify-between"
+            >
+              <span>অপঠিত বার্তা</span>
+              {notifications?.length > 0 &&
+                <span
+                  className="text-red-500"
+                >
+                  {
+                    notifications.filter(
+                      (notification) => notification.status === false
+                    ).length
+                  }
+                </span>
+              }
+
             </Link>
           </MenuItem>
           {user?.isAdmin && (
