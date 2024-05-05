@@ -5,7 +5,6 @@ import UserMenu from './UserMenu'
 
 export default function IsUser() {
     const { isAuth } = useUserStore()
-
     return (
         <div className="flex justify-end items-center space-x-3">
             {!isAuth ?

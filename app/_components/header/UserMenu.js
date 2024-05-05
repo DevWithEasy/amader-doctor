@@ -2,9 +2,11 @@
 import useServiceStore from "@/app/_store/serviceStore";
 import useUserStore from "@/app/_store/userStore";
 import api_url from "@/app/_utils/apiurl";
+import socket from "@/app/_utils/socket";
 import { Menu, MenuButton, MenuGroup, MenuItem, MenuList } from "@chakra-ui/react";
 import Image from 'next/image'
 import Link from 'next/link'
+import { useEffect } from "react";
 
 const UserMenu = () => {
   const { user, removeUser, notifications } = useUserStore()
@@ -13,6 +15,10 @@ const UserMenu = () => {
     removeUser()
     removeData()
   }
+
+  useEffect(()=>{
+    socket.emit('join', {id : user._id})
+  },[])
   return (
     <Menu>
       <MenuButton>
