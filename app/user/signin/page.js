@@ -8,9 +8,6 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from "react"
 import { BsEye, BsEyeSlash } from "react-icons/bs"
-import { io } from 'socket.io-client'
-
-const socket = io(process.env.NODE_ENV === 'production' ? 'https://amaderdoctor.vercel.app' : 'http://localhost:8080')
 
 export default function Signin() {
     const { addUser,addNotifications } = useUserStore()
@@ -24,7 +21,7 @@ export default function Signin() {
     })
 
     return (
-        <div className="mt-3 w-10/12 md:w-5/12 mx-auto px-4 py-2 border rounded space-y-2 bg-white/50">
+        <div className="mt-3 w-11/12 md:w-5/12 mx-auto px-4 py-2 border rounded space-y-2 bg-white/50">
             <h1 className="text-2xl font-bold text-center uppercase border-b py-2">প্রবেশ করুন</h1>
             <div className=" space-y-1">
                 <label>আপনার ই-মেইল অথবা নাম্বার লিখুন : </label>
@@ -32,7 +29,7 @@ export default function Signin() {
                     type='email'
                     name='email'
                     onChange={(e) => handleChange(e, value, setValue)}
-                    className='w-full p-2 rounded placeholder:text-sm border bg-[#f8f8f8] focus:bg-white focus:outline-none focus:border-blue-500'
+                    className='w-full p-2 rounded placeholder:text-sm border focus:outline-blue-500'
                 />
             </div>
 
@@ -42,7 +39,7 @@ export default function Signin() {
                     type={type}
                     name='password'
                     onChange={(e) => handleChange(e, value, setValue)}
-                    className='w-full p-2 rounded placeholder:text-sm border bg-[#f8f8f8] focus:bg-white focus:outline-none focus:border-blue-500'
+                    className='w-full p-2 rounded placeholder:text-sm border focus:outline-blue-500'
                 />
                 <button onClick={() => passwordView(type, setType)} className='absolute right-2 bottom-3 text-gray-600'>
                     {type === 'password' ? <BsEyeSlash size={20} /> : <BsEye size={20} />}
@@ -50,7 +47,7 @@ export default function Signin() {
             </div>
 
             <button
-                onClick={() => handleSignIn(value, addUser,addNotifications, setLoading, router, toast, socket)}
+                onClick={() => handleSignIn({value, addUser,addNotifications, setLoading, router, toast})}
                 className="w-full p-2 bg-blue-400 text-white rounded hover:bg-blue-500 hover:transition-all hover:duration-300"
             >
                 {loading ? 'অপেক্ষা করুন...' : 'প্রবেশ করুন'}

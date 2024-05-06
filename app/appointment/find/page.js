@@ -1,3 +1,6 @@
+import AppointmentFind from "@/app/_components/appointment/AppointmentFind";
+import Doctor from "@/app/_components/home/Doctor";
+import Search from "@/app/_components/home/Search";
 import api_url from "@/app/_utils/apiurl";
 
 async function getData(specialization,day) {
@@ -12,9 +15,34 @@ async function getData(specialization,day) {
 
 export default async function Page({ searchParams }) {
     const { specialization, day } = searchParams
-    const data = await getData(specialization, day)
+    let data
+    if(specialization && day){
+        data = await getData(specialization, day)
+    }
     console.log(data)
     return (
-        <div>Find</div>
+        <div
+            className="pt-2 pb-16"
+        >
+            <AppointmentFind/>
+
+            {data?.length === 0 ?
+                <div>
+                    কোন ডাক্তার খুঁজে পাওয়া যায়নি।
+                </div>
+            :
+                <div>
+                                <div
+                className="grid grid-cols-2 md:grid-cols-4 gap-4"
+            >
+                {
+                    data?.map(doctor =>
+                        <Doctor key={doctor._id} {...{ doctor }} />
+                    )
+                }
+            </div>
+                </div>
+            }
+        </div>
     )
 }

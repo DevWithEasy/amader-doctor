@@ -4,23 +4,14 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { CiSearch } from "react-icons/ci"
 import { useToast } from '@chakra-ui/react'
-import dayNameBangla from "@/app/_utils/dayNameBangla";
+import SelectSpecialist from "../search_find/SelectSpecialist";
+import SelectDay from "../search_find/SelectDay";
 
 export default function Search({ specializations }) {
     const toast = useToast()
     const router = useRouter()
     const [specialization, setSpecialization] = useState("")
     const [day, setDay] = useState("")
-
-    const daysOfWeek = [
-        "Saturday",
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-    ]
 
     const handleFind = () => {
         if (specialization === "" || day === "") {
@@ -51,37 +42,11 @@ export default function Search({ specializations }) {
             <div
                 className="py-2 flex items-center space-x-2"
             >
-                {/* <input
-                    type='text'
-                    placeholder="নাম লিখুন..."
-                    className='px-2 py-1 border focus:outline-blue-500 rounded'
-                /> */}
-                <select
-                    onChange={(e) => setSpecialization(e.target.value)}
-                    className="px-2 py-1 border focus:outline-blue-500 rounded"
-                >
-                    <option>অভিজ্ঞতা বাছাই করুন</option>
-                    {specializations &&
-                        specializations.map(s => (
-                                <option key={s._id} value={s._id}>
-                                    {s.name}
-                                </option>
-                            ))}
-                </select>
-                <select
-                    onChange={(e) => setDay(e.target.value)}
-                    className="px-2 py-1 border focus:outline-blue-500 rounded"
-                >
-                    <option>বার বাছাই করুন</option>
-                    {daysOfWeek &&
-                        daysOfWeek
-                            .map((day) => day)
-                            .map((day, i) => (
-                                <option key={i} value={day}>
-                                    {dayNameBangla(day)}
-                                </option>
-                            ))}
-                </select>
+                <SelectSpecialist {...{
+                    specializations,
+                    setSpecialization
+                }}/>
+                <SelectDay {...{setDay}}/>
                 <button
                     onClick={handleFind}
                     className='px-6 py-1.5 flex items-center space-x-2 bg-blue-500 text-white rounded'

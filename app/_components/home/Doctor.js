@@ -19,7 +19,7 @@ export default function Doctor({ doctor }) {
                     alt=""
                     width={200}
                     height={50}
-                    className='w-[500px] h-[200px] rounded-md'
+                    className='w-auto mx-auto h-[200px] rounded-md'
                 />
             </Link>
             <Link

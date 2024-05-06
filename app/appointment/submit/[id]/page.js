@@ -19,11 +19,13 @@ export default async function AppointmentSubmit({ params }) {
   const { data } = await getData(params.id)
   
   return (
-    <main>
+    <main
+      className="pb-16"
+    >
       <div
-        className="flex justify-between"
+        className="md:flex justify-between"
       >
-      <div className='w-1/2'>
+      <div className='md:w-1/2'>
         <div className='flex space-x-4 p-2 pt-2 bg-white rounded'>
           <Image
             src={find_image_url(data.user)}
@@ -43,7 +45,7 @@ export default async function AppointmentSubmit({ params }) {
         {data?.chambers && <AppoinmentChamberList chambers={data.chambers} />}
       </div>
       <div
-        className="w-1/2"
+        className="md:w-1/2"
       >
         <AppointmentForm {...{doctor : data}}/>
       </div>

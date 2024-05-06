@@ -7,7 +7,7 @@ export default function Hero() {
             className='pt-5 flex flex-col-reverse md:flex-row justify-between items-center'
         >
             <div
-                className='md:w-4/12 pt-5 md:pt-0 space-y-2'
+                className='md:w-4/12 p-4 md:p-0 space-y-2 border rounded md:border-none'
             >
                 <h1 className="text-3xl font-semibold">
                     খুঁজুন এবং <span className='text-blue-500'>অ্যাপয়েন্টমেন্ট</span> নিন আপনার পছন্দের <span className='text-blue-500'>ডাক্তারের</span>
@@ -25,7 +25,7 @@ export default function Hero() {
                 </div>
             </div>
             <div
-                className='md:w-8/12 flex justify-end'
+                className='md:w-8/12 md:flex justify-end hidden'
             >
                 <Image
                     src='/image/herobanner.avif'

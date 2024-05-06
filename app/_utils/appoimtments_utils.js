@@ -3,9 +3,13 @@ import socket from "./socket";
 import api_url from "./apiurl";
 
 
-export async function addAppointment(data,toast,navigate,onOpen){
+export async function submitAppointment(data){
+    const {user,value,toast,router,setView} = data
+    if(!user?._id){
+        return setView(true)
+    }
     try {
-        const res = await axios.post(`${api_url}/api/appointment/add`,data,{
+        const res = await axios.post(`${api_url}/api/appointment/add`,value,{
             headers : {
                 authorization : 'Bearer ' + localStorage.getItem('accessToken')
             }
@@ -14,6 +18,7 @@ export async function addAppointment(data,toast,navigate,onOpen){
             toast.success('Appointment added successfully')
             // navigate('/appointments')
             socket.emit('create_appointment',res.data.data)
+            router.push(`/user/${user._id}/appointments`)
         }
     } catch (error) {
         if(error.response.data.status === 405){

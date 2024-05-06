@@ -3,13 +3,18 @@ import useUserStore from '@/app/_store/userStore';
 import handleChange from '@/app/_utils/handleChange';
 import { selectedDay } from '@/app/_utils/selectedDay';
 import { useState } from 'react';
-import {useToast} from '@chakra-ui/react'
+import {useDisclosure, useToast} from '@chakra-ui/react'
 import dayNameBangla from '@/app/_utils/dayNameBangla';
+import { submitAppointment } from '@/app/_utils/appoimtments_utils';
+import { useRouter } from 'next/navigation';
+import LoginModal from '../LoginModal';
 
 export default function AppointmentForm({ doctor }) {
     const toast = useToast()
     const { user } = useUserStore()
+    const router = useRouter()
     const { chambers } = doctor
+    const [view,setView] = useState(false)
     const [chamber, setChamber] = useState({})
     const [value, setValue] = useState({
         patientName: user?.name,
@@ -21,7 +26,7 @@ export default function AppointmentForm({ doctor }) {
         appointmentDay: '',
         appointmentDate: '',
     })
-    console.log(chamber)
+    
     return (
         <div>
             <div className='w-full bg-white rounded-md'>
@@ -54,6 +59,13 @@ export default function AppointmentForm({ doctor }) {
                     </div>
                     <div>
                         <button
+                            onClick={()=> submitAppointment({
+                                user,
+                                value,
+                                toast,
+                                router,
+                                setView:setView
+                            })}
                             className='px-4 py-2 bg-blue-500 text-white rounded-md'
                         >
                             সাবমিট করুন
@@ -71,7 +83,7 @@ export default function AppointmentForm({ doctor }) {
                     }
                 </div>
             </div>
-
+            <LoginModal {...{view,setView}}/>
         </div>
     )
 }

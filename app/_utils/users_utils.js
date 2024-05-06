@@ -1,5 +1,6 @@
 import axios from "axios"
 import api_url from "./apiurl"
+import socket from "./socket"
 
 export async function handleSignUp(value, router, toast) {
     try {
@@ -28,7 +29,8 @@ export async function handleSignUp(value, router, toast) {
     }
 }
 
-export async function handleSignIn(value, addUser,addNotifications, setLoading, router, toast, socket) {
+export async function handleSignIn(data) {
+    const {value, addUser,addNotifications, setLoading, router, toast,setView} = data
     try {
         setLoading(true)
         const res = await axios.post(`${api_url}/api/auth/signin`, value)
@@ -48,10 +50,14 @@ export async function handleSignIn(value, addUser,addNotifications, setLoading, 
 
                 socket.emit('join_chat', { id: res.data.data._id })
 
-                if (location.state?.from) {
-                    router.push(location.state.from)
-                } else {
-                    router.push('/')
+                if(setView){
+                    return setView(false)
+                }else{
+                    if (location.state?.from) {
+                        router.push(location.state.from)
+                    } else {
+                        router.push('/')
+                    }
                 }
             }
         }

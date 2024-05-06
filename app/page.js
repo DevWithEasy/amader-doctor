@@ -17,7 +17,7 @@ export default async function Home() {
   const { data: { doctors, specializations } } = await getData()
 
   return (
-    <main className="pb-10 mx-4 md:w-10/12 md:mx-auto space-y-5">
+    <main className="pb-10 mx-4 md:w-10/12 md:mx-auto space-y-8">
       <Hero />
       <SearchAndCategory {...{ specializations }} />
       <DoctorList {...{ doctors }} />

@@ -6,14 +6,17 @@ import socket from "@/app/_utils/socket";
 import { Menu, MenuButton, MenuGroup, MenuItem, MenuList } from "@chakra-ui/react";
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 const UserMenu = () => {
   const { user, removeUser, notifications } = useUserStore()
+  const router = useRouter()
   const { removeData } = useServiceStore()
   const handleLogout = () => {
     removeUser()
     removeData()
+    router.push('/')
   }
 
   useEffect(()=>{

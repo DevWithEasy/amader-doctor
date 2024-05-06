@@ -21,11 +21,11 @@ export default function Signup() {
   });
 
   return (
-    <div className="w-full md:w-5/12 mx-auto px-4 py-2 my-5 border rounded space-y-2 bg-white/50">
+    <div className="mt-3 mb-16 w-11/12 md:w-5/12 mx-auto px-4 py-2 border rounded space-y-2 bg-white/50">
       <h1 className="text-2xl font-bold text-center uppercase border-b py-2">
         নতুন একাউন্ট তৈরি করুন
       </h1>
-      <p className="text-gray-400 pb-5">
+      <p className="text-gray-500 pb-5">
         একাউন্ট করুন খুব সহজেই। সঠিক তথ্য প্রদান করে আপনার একাউন্ট টি ভেরিফাই
         করুন। আপনার তথ্য আমরা কারো সাথে শেয়ার করিনা।
       </p>
