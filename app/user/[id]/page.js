@@ -1,27 +1,19 @@
 'use client'
-import { toBengaliNumber } from "bengali-number";
-import moment from "moment";
-import { useEffect, useState } from "react";
-import { useToast } from "@chakra-ui/react";
-import { useParams } from "next/navigation";
-import Image from 'next/image'
 import Upload from "@/app/_components/Upload";
 import useUserStore from "@/app/_store/userStore";
-import handleChange from "@/app/_utils/handleChange";
-import dateGenerator from "@/app/_utils/dateGenerator";
-import { getUser, updateUser } from "@/app/_utils/users_utils";
 import api_url from "@/app/_utils/apiurl";
+import handleChange from "@/app/_utils/handleChange";
+import { updateUser } from "@/app/_utils/users_utils";
+import { useToast } from "@chakra-ui/react";
+import Image from 'next/image';
+import { useParams } from "next/navigation";
+import { useState } from "react";
 
 export default function Profile() {
-  const { random, addUser } = useUserStore()
+  const toast = useToast()
+  const { user, addUser } = useUserStore()
   const { id } = useParams()
-  const [user, setUser] = useState({})
-  const [address, setAddress] = useState({})
-
-  useEffect(() => {
-    getUser(id, setUser, setAddress)
-  }, [id, random])
-  // console.log(user)
+  const [c_user, setUser] = useState(user)
   return (
     <div className="p-4 space-y-5">
       <div
@@ -42,7 +34,7 @@ export default function Profile() {
           <input
             type="text"
             name="name"
-            value={user?.name}
+            value={c_user?.name}
             onChange={(e) => handleChange(e, user, setUser)}
             className="w-full p-2 border focus:outline-blue-500 rounded-md"
             placeholder="নাম"
@@ -69,17 +61,24 @@ export default function Profile() {
             onChange={(e) => handleChange(e, user, setUser)}
             className="w-full p-2 border focus:outline-blue-500 rounded-md"
             placeholder="মোবাইল নাম্বার"
+            readOnly
           />
         </div>
 
         <button
-            onClick={() =>
-              updateUser(id, user, address, setUser, addUser, toast)
-            }
-            className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-          >
-            সংরক্ষন করুন
-          </button>
+          onClick={() =>
+            updateUser({
+              id,
+              value: c_user,
+              setUser,
+              addUser,
+              toast
+            })
+          }
+          className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+        >
+          সংরক্ষন করুন
+        </button>
       </div>
     </div>
   );

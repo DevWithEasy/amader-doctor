@@ -6,6 +6,7 @@ const serviceStore = (set) => ({
     specialists: [],
     doctors: [],
     users: [],
+    chamberId : '',
     chambers : [],
     process: false,
 
@@ -27,6 +28,11 @@ const serviceStore = (set) => ({
     addSpecialists: (data) => {
         set((state) => ({
             specialists: data
+        }))
+    },
+    addChamber: (id) => {
+        set((state) => ({
+            chamberId: id
         }))
     },
     addChambers: (data) => {

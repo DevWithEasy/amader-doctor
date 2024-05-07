@@ -11,6 +11,7 @@ import { useEffect, useState } from "react"
 import { CiSearch } from 'react-icons/ci'
 import SelectSpecialist from './SelectSpecialist'
 import SelectDay from './SelectDay'
+import axios from 'axios'
 
 export default function FindModal({ view, setView }) {
     const toast = useToast()
@@ -71,12 +72,16 @@ export default function FindModal({ view, setView }) {
                                     width: true
                                 }} />
                             </div>
-                            <p>অথবা</p>
+                            <p
+                                className='pb-2 text-center'
+                            >
+                                অথবা
+                            </p>
                             <input
                                 type='text'
                                 onChange={(e) => setName(e.target.name)}
                                 placeholder="নাম লিখুন..."
-                                className='px-2 py-1 w-full border focus:outline-blue-500 placeholder:text-sm rounded'
+                                className='px-2 py-1.5 w-full border focus:outline-blue-500 placeholder:text-sm rounded'
                             />
                         </div>
                         <div

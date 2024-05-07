@@ -1,4 +1,4 @@
-export function selectedDay(e, value, setValue, chambers, setChamber, toast) {
+export function selectedDay(e,addChamber, chambers, setChamber,setAlertView, toast) {
     if (new Date(e.target.value).getTime() < Date.now()) {
         return toast({
             title: 'সঠিক তারিখ নির্বাচনে ব্যর্থ',
@@ -8,13 +8,20 @@ export function selectedDay(e, value, setValue, chambers, setChamber, toast) {
             isClosable: true,
         })
     }
-    const date = new Date(e.target.value);
-    const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    const dayName = daysOfWeek[date.getDay()];
+    const date = new Date(e.target.value)
+
+    const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+
+    const dayName = daysOfWeek[date.getDay()]
+
     const days = chambers?.map(chamber => chamber.day)
+
     const day = days?.find(day => day === dayName)
+
     const chamber = chambers?.find(chamber => chamber.day === day)
+
     if (day === undefined) {
+        addChamber('')
         setChamber({})
         return toast({
             title: 'সঠিক তারিখ নির্বাচনে ব্যর্থ !',
@@ -24,6 +31,8 @@ export function selectedDay(e, value, setValue, chambers, setChamber, toast) {
             isClosable: true,
         })
     } else {
+        addChamber(chamber._id)
         setChamber({ ...chamber, date: date.toLocaleDateString() })
+        setAlertView(true)
     }
 }

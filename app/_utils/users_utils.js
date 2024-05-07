@@ -92,18 +92,40 @@ export async function getUser(id, setUser, setAddress) {
     setAddress(res.data.data.address)
 }
 
-export async function updateUser(id, user, address, setUser, addUser, toast) {
-    const res = await axios.put(`${api_url}/api/auth/user/update/${id}`,
-        { ...user, address },
-        {
-            headers: {
-                authorization: 'Bearer ' + localStorage.getItem('accessToken')
+export async function updateUser(data) {
+    const{id, value, setUser,setAddress, addUser, toast} = data
+    try {
+        const res = await axios.put(
+            `${api_url}/api/auth/user/update/${id}`,
+            value,
+            {
+                headers: {
+                    authorization: 'Bearer ' + localStorage.getItem('accessToken')
+                }
+            })
+        if (res.data.status === 200) {
+            setUser(res.data.data)
+            addUser((res.data.data))
+            if(setAddress){
+                setAddress(res.data.data.address)
             }
+            return toast({
+                title : 'আপডেট সফল',
+                description: 'প্রোফাইল আপডেট সফল হয়েছে।',
+                status: 'success',
+                duration: 2000,
+                isClosable: true,
+            })
+        }
+    } catch (error) {
+        console.log(error)
+        return toast({
+            title : 'আপডেট ব্যর্থ',
+            description: 'প্রোফাইল আপডেট সফল হয়নি।',
+            status: 'error',
+            duration: 2000,
+            isClosable: true,
         })
-    if (res.data.status === 200) {
-        setUser(res.data.data)
-        addUser((res.data.data))
-        toast.success('User updated successfully')
     }
 }
 

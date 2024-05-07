@@ -20,10 +20,10 @@ export default async function Doctor({ params }) {
   console.log(doctor)
   return (
     <div
-      className="w-10/12 mx-auto pt-5 flex justify-between space-x-5"
+      className="md:w-10/12 md:mx-auto px-2 pt-4 pb-16 flex flex-col md:flex-row justify-between md:space-x-5 space-y-3 md:space-y-0"
     >
       <div
-        className="w-8/12 space-y-5"
+        className="md:w-8/12 space-y-5"
       >
         <div
           className="flex p-4 border rounded space-x-4"
@@ -52,7 +52,7 @@ export default async function Doctor({ params }) {
             <div
               className="flex items-center space-x-2 text-xm text-gray-500"
             >
-              <CiLocationOn />
+              <CiLocationOn className="flex-none"/>
               <span>{doctor?.designation} হিসেবে {doctor?.workedAt} এ কর্মরত আছেন </span>
             </div>
             <button
@@ -86,7 +86,7 @@ export default async function Doctor({ params }) {
         </div>
       </div>
       <div
-        className="w-4/12 p-4 border rounded space-y-5"
+        className="md:w-4/12 p-4 border rounded space-y-5"
       >
         <p
           className="font-semibold"

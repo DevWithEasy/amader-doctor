@@ -2,10 +2,15 @@
 import useUserStore from '@/app/_store/userStore'
 import dateGenerator from '@/app/_utils/dateGenerator'
 import handleChange from '@/app/_utils/handleChange'
+import { updateUser } from '@/app/_utils/users_utils'
+import { useToast } from '@chakra-ui/react'
+import { useParams } from 'next/navigation'
 import React, { useState } from 'react'
 
 export default function PersonalInfo() {
-    const { user } = useUserStore()
+    const {id} = useParams()
+    const toast = useToast()
+    const { user,addUser } = useUserStore()
     const [c_user, setUser] = useState(user)
     const [address, setAddress] = useState(user?.address)
     return (
@@ -116,8 +121,8 @@ export default function PersonalInfo() {
                             className="w-full p-2 border focus:outline-blue-500 rounded-md"
                         >
                             <option value="">বাছাই করুন </option>
-                            <option value="no">না </option>
-                            <option value="yes">হ্যাঁ </option>
+                            <option value={false}>না </option>
+                            <option value={true}>হ্যাঁ </option>
                         </select>
                     </div>
                     <div>
@@ -151,6 +156,23 @@ export default function PersonalInfo() {
                     </div>
                 </div>
             </div>
+
+            <button
+                onClick={()=>updateUser({
+                    id,
+                    value : {
+                        ...c_user,
+                        address : address
+                    },
+                    addUser,
+                    setUser,
+                    setAddress,
+                    toast
+                })}
+                className='px-4 py-2 bg-blue-500 text-white rounded'
+            >
+                সংরক্ষন করুন
+            </button>
         </div>
 
     )

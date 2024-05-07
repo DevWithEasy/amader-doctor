@@ -3,14 +3,15 @@ import {
     ModalBody,
     ModalContent,
     ModalHeader,
-    ModalOverlay
+    ModalOverlay,
+    useToast
 } from '@chakra-ui/react'
 import { useState } from "react"
 import { BsEye, BsEyeSlash } from 'react-icons/bs'
 import passwordView from '../_utils/passwordView'
 import handleChange from '../_utils/handleChange'
 import { handleSignIn } from '../_utils/users_utils'
-import { useToast } from '@chakra-ui/react'
+import useUserStore from '../_store/userStore'
 
 export default function LoginModal({ view, setView }) {
     const toast = useToast()

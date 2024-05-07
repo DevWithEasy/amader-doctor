@@ -1,6 +1,7 @@
 import axios from "axios";
 import socket from "./socket";
 import api_url from "./apiurl";
+import makeToast, { errorToast } from "./MakeToast";
 
 
 export async function submitAppointment(data){
@@ -8,6 +9,38 @@ export async function submitAppointment(data){
     if(!user?._id){
         return setView(true)
     }
+    if(!value.chamber._id){
+        return errorToast({
+            toast,
+            description : "আপনি কোন চেম্বার সিলেক্ট করেনি।"
+        })
+    }else if(!value.name){
+        return errorToast({
+            toast,
+            description : "রোগীর নাম লিখুন"
+        })
+    }else if(!value.age){
+        return errorToast({
+            toast,
+            description : "রোগীর বয়স লিখুন"
+        })
+    }else if(!value.gender){
+        return errorToast({
+            toast,
+            description : "রোগীর লিঙ্গ লিখুন"
+        })
+    }else if(!value.address){
+        return errorToast({
+            toast,
+            description : "রোগীর ঠিকানা লিখুন"
+        })
+    }else if(!value.phone){
+        return errorToast({
+            toast,
+            description : "রোগীর যোগাযোগের নাম্বার লিখুন"
+        })
+    }
+    
     try {
         const res = await axios.post(`${api_url}/api/appointment/add`,value,{
             headers : {
