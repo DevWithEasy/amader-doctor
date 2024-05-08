@@ -7,17 +7,21 @@ import {
     AlertDialogOverlay,
     Button,
 } from '@chakra-ui/react';
+import { useRouter } from 'next/navigation';
 import React from 'react';
+import useUserStore from '../_store/userStore';
 
-const NoBalanceAlert = ({isOpen, onOpen, onClose,navigate}) => {
+const NoBalanceAlert = ({view,setView}) => {
+    const {user} = useUserStore()
     const cancelRef = React.useRef()
+    const router = useRouter()
     return (
         <>
 
             <AlertDialog
-                isOpen={isOpen}
+                isOpen={view}
                 leastDestructiveRef={cancelRef}
-                onClose={onClose}
+                onClose={()=>setView(false)}
                 isCentered
             >
                 <AlertDialogOverlay>
@@ -33,10 +37,10 @@ const NoBalanceAlert = ({isOpen, onOpen, onClose,navigate}) => {
                     </AlertDialogBody>
 
                     <AlertDialogFooter>
-                    <Button ref={cancelRef} onClick={onClose}>
+                    <Button ref={cancelRef} onClose={()=>setView(false)}>
                         বাতিল
                     </Button>
-                    <Button colorScheme='blue' onClick={()=>navigate('/payment/add')} ml={3}>
+                    <Button colorScheme='blue' onClick={()=>router.push(`/user/${user._id}/transections/add`)} ml={3}>
                         টাকা যোগ করুন
                     </Button>
                     </AlertDialogFooter>

@@ -7,10 +7,11 @@ import api_url from "@/app/_utils/apiurl";
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import axios from 'axios'
 
 export default function Appointments() {
     const { id } = useParams()
-    const [type, setType] = useState('complete')
+    const [type, setType] = useState('uncomplete')
     const [view, setView] = useState(false)
     const { addAppointments } = useUserStore()
     const [selectId, setSelectId] = useState('')
@@ -33,7 +34,7 @@ export default function Appointments() {
     }, [])
 
     return (
-        <div className="w-full space-y-2 p-2">
+        <div className="w-full space-y-2">
             <h1 className="text-xl font-semibold text-center">আপনার অ্যাপয়েন্টমেন্ট গুলো</h1>
             <div
                 className=''

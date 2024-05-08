@@ -3,6 +3,7 @@ import useServiceStore from "@/app/_store/serviceStore";
 import useUserStore from "@/app/_store/userStore";
 import api_url from "@/app/_utils/apiurl";
 import socket from "@/app/_utils/socket";
+import SocketManager from "@/app/_utils/SocketManager";
 import { Menu, MenuButton, MenuGroup, MenuItem, MenuList } from "@chakra-ui/react";
 import Image from 'next/image'
 import Link from 'next/link'
@@ -10,35 +11,42 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 const UserMenu = () => {
-  const { user, removeUser, notifications } = useUserStore()
+  const { user, removeUser, notifications, addNotifications } = useUserStore()
   const router = useRouter()
   const { removeData } = useServiceStore()
+
+  const Socket = new SocketManager(socket,addNotifications)
+
   const handleLogout = () => {
     removeUser()
     removeData()
     router.push('/')
   }
 
-  useEffect(()=>{
-    socket.emit('join', {id : user._id})
-  },[])
+  useEffect(() => {
+    Socket.create_appointment()
+  })
+
+  useEffect(() => {
+    socket.emit('join', { id: user._id })
+  }, [])
   return (
     <Menu>
       <MenuButton>
         <div
-          className="relative w-[30px] h-[30px]"
+          className="relative w-[35px] h-[35px]"
         >
           <Image
             src={user?.image?.url ? `${api_url}/${user?.image?.url}` : '/image/user.png'}
             alt="user_image"
-            height={30}
-            width={30}
+            height={35}
+            width={35}
             className="rounded-full"
           />
           {
             notifications?.length > 0 &&
             <div
-              className="absolute flex justify-center items-center h-5 w-5 bg-white text-red-500 rounded-full text-xs text-nowrap -right-3 -bottom-3"
+              className="absolute flex justify-center items-center h-5 w-5 bg-gray-200 text-red-500 rounded-full text-xs text-nowrap -bottom-2 -left-4"
             >
               <span>
                 {
@@ -69,15 +77,18 @@ const UserMenu = () => {
             >
               <span>অপঠিত বার্তা</span>
               {notifications?.length > 0 &&
-                <span
-                  className="text-red-500"
+                <div
+                  className="h-5 w-5 flex justify-center items-center bg-red-500 text-white text-xs rounded-full"
                 >
-                  {
-                    notifications.filter(
-                      (notification) => notification.status === false
-                    ).length
-                  }
-                </span>
+                  <span>
+                    {
+                      notifications.filter(
+                        (notification) => notification.status === false
+                      ).length
+                    }
+                  </span>
+                </div>
+
               }
 
             </Link>

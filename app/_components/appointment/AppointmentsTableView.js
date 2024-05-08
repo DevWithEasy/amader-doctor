@@ -1,6 +1,9 @@
 import useUserStore from '@/app/_store/userStore';
 import { cancelAppointment } from '@/app/_utils/appoimtments_utils';
+import appointmentFiltration from '@/app/_utils/appointmentFiltration';
 import AppointmentStatusBangla from '@/app/_utils/AppointmentStatusBangla';
+import dayNameBangla from '@/app/_utils/dayNameBangla';
+import statusColor from '@/app/_utils/statusColor'
 import { toBengaliNumber } from 'bengali-number';
 import { toast } from 'react-hot-toast';
 
@@ -9,7 +12,7 @@ const AppointmentsTableView = ({type, setView, setId }) => {
 
     return (
 
-        <div className="hidden md:block m-2 relative overflow-x-auto">
+        <div className="hidden md:block relative overflow-x-auto">
             <table className="w-full text-left text-gray-500">
                 <thead className="bg-gray-500 text-white">
                     <tr>
@@ -36,17 +39,14 @@ const AppointmentsTableView = ({type, setView, setId }) => {
                 </thead>
                 <tbody>
                     {appointments && 
-                    appointments.filter(
-                        appoint => 
-                        type ==='complete' ? appoint.status==='Confirmed' || appoint.status==='Pending' : appoint.status === 'Canceled' || appoint.status==='Completed'
-                    )
+                    appointmentFiltration(type,appointments)
                     .map((appointment) => 
                         <tr key={appointment._id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                             <td className="px-4 py-2">
-                                {toBengaliNumber(appointment?.appointmentId)}
+                                {toBengaliNumber(appointment?.order)}
                             </td>
                             <td className="px-6 py-2">
-                                {appointment?.patientName}
+                                {appointment?.name}
                             </td>
                             <td className="px-6 py-2">
                                 {appointment?.address}

@@ -10,6 +10,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import LoginModal from '../LoginModal';
 import AppoinmentChamberAlert from './AppoinmentChamberAlert';
+import NoBalanceAlert from '../NoBalanceAlert';
 
 export default function AppointmentForm({ doctor }) {
     const toast = useToast()
@@ -20,6 +21,7 @@ export default function AppointmentForm({ doctor }) {
     const { chambers } = doctor
     const [view, setView] = useState(false)
     const [alertView, setAlertView] = useState(false)
+    const [balanceView, setBalanceView] = useState(false)
     const [chamber, setChamber] = useState({})
     const [value, setValue] = useState({
         name: '',
@@ -107,7 +109,8 @@ export default function AppointmentForm({ doctor }) {
                                 },
                                 toast,
                                 router,
-                                setView: setView
+                                setView,
+                                setBalanceView
                             })}
                             className='px-4 py-2 bg-blue-500 text-white rounded-md'
                         >
@@ -118,6 +121,12 @@ export default function AppointmentForm({ doctor }) {
             </div>
             {
                 view && <LoginModal {...{ view, setView }} />
+            }
+            {
+                balanceView && <NoBalanceAlert {...{
+                    view : balanceView, 
+                    setView : setBalanceView
+                }}/>
             }
             {
                 alertView && <AppoinmentChamberAlert {...{

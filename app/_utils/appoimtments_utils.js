@@ -1,11 +1,11 @@
 import axios from "axios";
 import socket from "./socket";
 import api_url from "./apiurl";
-import makeToast, { errorToast } from "./MakeToast";
+import { errorToast, successToast } from "./makeToast";
 
 
 export async function submitAppointment(data){
-    const {user,value,toast,router,setView} = data
+    const {user,value,toast,router,setView,setBalanceView} = data
     if(!user?._id){
         return setView(true)
     }
@@ -48,14 +48,18 @@ export async function submitAppointment(data){
             }
         })
         if(res.data.status === 200){
-            toast.success('Appointment added successfully')
-            // navigate('/appointments')
+            successToast({
+                toast,
+                description: res.data.message
+            })
+            console.log(res.data.data)
             socket.emit('create_appointment',res.data.data)
+            
             router.push(`/user/${user._id}/appointments`)
         }
     } catch (error) {
         if(error.response.data.status === 405){
-            return onOpen()
+            return setBalanceView(true)
         }
         toast.error(error.response.data.message)
     }

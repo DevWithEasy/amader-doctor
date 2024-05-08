@@ -2,77 +2,30 @@ import useUserStore from '@/app/_store/userStore';
 import { cancelAppointment } from '@/app/_utils/appoimtments_utils';
 import AppointmentStatusBangla from '@/app/_utils/AppointmentStatusBangla';
 import { toBengaliNumber } from 'bengali-number';
+import dayNameBangla from '@/app/_utils/dayNameBangla';
 import { toast } from 'react-hot-toast';
 
-const AppointmentsCardView = ({ type,setView, setId }) => {
-    const { user,appointments } = useUserStore()
+const AppointmentsCardView = ({ type, setView, setId }) => {
+    const { user, appointments } = useUserStore()
     return (
         <div
-            className='md:hidden m-2 space-y-2'
+            className='md:hidden -ml-4 space-y-2'
         >
             {
                 appointments && appointments.map(appointment =>
                     <div
                         key={appointment._id}
-                        className='p-4 bg-white rounded'
+                        className='p-2 border-b'
                     >
+                        <p>{appointment?.name}</p>
                         <p>
-                            <span
-                                className='font-bold'
-                            >
-                                রোগীর নামঃ
-                            </span>
-                            <span>
-                                &nbsp;
-                                {appointment?.patientName}
-                            </span>
+                            {appointment?.address},
+                            {dayNameBangla(appointment.appointmentDay)},
+                            {toBengaliNumber(appointment.appointmentDate)}
                         </p>
-                        <p>
-                            <span
-                                className='font-bold'
-                            >
-                                ঠিকানাঃ
-                            </span>
-                            <span>
-                                &nbsp;
-                                {appointment?.address}
-                            </span>
-                        </p>
-                        <p>
-                            <span
-                                className='font-bold'
-                            >
-                                অ্যাপয়েন্টম্যান্টঃ
-                            </span>
-                            <span>
-                                &nbsp;
-                                {dayNameBangla(appointment?.appointmentDay)}
-                            </span>
-                        </p>
-                        <p>
-                            <span
-                                className='font-bold'
-                            >
-                                অবস্থাঃ
-                            </span>
-                            <span>
-                                &nbsp;
-                                {AppointmentStatusBangla(appointment?.status)}
-                            </span>
-                        </p>
-                        <p>
-                            <span
-                                className='font-bold'
-                            >
-                                সিরিয়াল নংঃ
-                            </span>
-                            <span>
-                                &nbsp;
-                                {toBengaliNumber(appointment?.appointmentId)}
-                            </span>
-                        </p>
+                        <p>{appointment?.order}</p>
                         <div
-                            className='pt-2 space-x-2'
+                            className='pt-2 flex justify-end space-x-2'
                         >
                             <button
                                 onClick={() => { setId(appointment?._id); setView(true) }}
@@ -80,7 +33,7 @@ const AppointmentsCardView = ({ type,setView, setId }) => {
                             >
                                 বিস্তারিত
                             </button>
-                            <button onClick={() => cancelAppointment(appointment._id, user, toast,setAppointments)} className="px-2 py-1 bg-red-400 text-white rounded hover:bg-red-500">বাতিল</button>
+                            <button onClick={() => cancelAppointment(appointment._id, user, toast, setAppointments)} className="px-2 py-1 bg-red-400 text-white rounded hover:bg-red-500">বাতিল</button>
                         </div>
                     </div>
                 )

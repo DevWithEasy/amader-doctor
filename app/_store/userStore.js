@@ -29,11 +29,6 @@ const userStore = (set) => ({
             notifications : notifications 
         }))
     },
-    addNewNotification: (notification) => {
-        set((state) => ({
-            notifications : state.notifications.find(n => n.id === notification.id) ? [...state.notifications] : [...state.notifications,notification]
-        }))
-    },
     readSingleNotification: (id) => {
         set((state) => ({
             notifications: state.notifications.map(notification=>{

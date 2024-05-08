@@ -15,7 +15,7 @@ export default function PersonalInfo() {
     const [address, setAddress] = useState(user?.address)
     return (
         <div
-            className='md:w-8/12 p-4 pb-10 space-y-5'
+            className='md:w-8/12 pb-10 space-y-5'
         >
             <div
                 className='space-y-3'
