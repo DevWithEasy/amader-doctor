@@ -3,7 +3,6 @@ import socket from "./socket";
 import api_url from "./apiurl";
 import { errorToast, successToast } from "./makeToast";
 
-
 export async function submitAppointment(data){
     const {user,value,toast,router,setView,setBalanceView} = data
     if(!user?._id){
@@ -92,13 +91,13 @@ export async function cancelAppointment(id,user,toast,setAppointments){
     
 }
 
-export async function getAppointments(day,date,setAppointments){
-    const res = await axios.get(`${api_url}/api/appointment/all/search?day=${day}&date=${date}`,{
+export async function getDoctorAppointments(date,setAppointments){
+    const res = await axios.get(`${api_url}/api/appointment/all/search?&date=${new Date(date).toLocaleDateString()}`,{
         headers : {
             authorization : 'Bearer ' + localStorage.getItem('accessToken')
         }
-    });
-    setAppointments(res.data.data);
+    })
+    setAppointments(res.data.data)
 }
 
 export async function confirmAppointment(id,day,date,setAppointments){

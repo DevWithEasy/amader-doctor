@@ -15,7 +15,7 @@ export default function Profile() {
   const { id } = useParams()
   const [c_user, setUser] = useState(user)
   return (
-    <div className="p-4 space-y-5">
+    <div className="space-y-5">
       <div
         className="flex items-end"
       >

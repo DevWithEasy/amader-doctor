@@ -31,13 +31,7 @@ const userStore = (set) => ({
     },
     readSingleNotification: (id) => {
         set((state) => ({
-            notifications: state.notifications.map(notification=>{
-                if(notification.id === id){
-                    return {...notification ,status : 'read' }
-                }else{
-                    return notification
-                }
-            })
+            notifications: state.notifications.map(notification=> notification._id !== id ? notification : {...notification,status : true})
         }))
     },
     readAllNotifications: () => {
