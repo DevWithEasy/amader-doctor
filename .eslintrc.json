@@ -1,6 +1,6 @@
 {
   "extends": "next/core-web-vitals",
   "rules" : {
-    "eslint-disable react-hooks/exhaustive-deps" : false
+    "eslint-disable react-hooks/exhaustive-deps" : 0
   }
 }
