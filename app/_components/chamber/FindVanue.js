@@ -3,13 +3,11 @@ import api_url from "@/app/_utils/apiurl";
 import {
     Modal,
     ModalBody,
-    ModalCloseButton,
     ModalContent,
-    ModalHeader,
-    ModalOverlay,
+    ModalOverlay
 } from "@chakra-ui/react";
 import axios from 'axios';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 const FindVanue = ({ setName, setValue, setLocation, vanue_view, setVanue_View, handleView }) => {
     const { hospitals, addHospitals } = useServiceStore()
@@ -43,7 +41,7 @@ const FindVanue = ({ setName, setValue, setLocation, vanue_view, setVanue_View, 
     }
     useEffect(() => {
         getAllHospitals()
-    }, [])
+    })
 
     return (
         <>

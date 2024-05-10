@@ -29,7 +29,7 @@ const UserMenu = () => {
 
   useEffect(() => {
     socket.emit('join', { id: user._id })
-  }, [])
+  }, [user._id])
   return (
     <Menu>
       <MenuButton>

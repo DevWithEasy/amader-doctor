@@ -25,7 +25,7 @@ const MapView = () => {
 
     useEffect(() => {
         getAllHospitals()
-    }, [])
+    })
 
     return (
         <div

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams } from 'next/navigation';
 import useServiceStore from "@/app/_store/serviceStore";
 import Heading from "../Heading";
+import Image from 'next/image'
 
 export default function DoctorDetails() {
   const { id } = useParams()
@@ -21,9 +22,11 @@ export default function DoctorDetails() {
       <div
         className="flex flex-col items-center space-y-2"
       >
-        <img
-          src={`${api_url}/${doctor?.user?.image?.url}`}
+        <Image
+        src={`${api_url}/${doctor?.user?.image?.url}`}
           alt="doctor_image"
+          height={150}
+          width={150}
           className="h-[150px] w-[150px] mx-auto rounded-full hover:transition-all hover:duration-300"
         />
         <button

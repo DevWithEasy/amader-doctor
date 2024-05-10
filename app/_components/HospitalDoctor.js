@@ -2,6 +2,7 @@ import { useRouter } from "next/navigation"
 import dayNameBangla from "../_utils/dayNameBangla"
 import formatTime from "../_utils/formatTime"
 import api_url from "../_utils/apiurl"
+import Image from 'next/image'
 
 export default function HospitalDoctor({ chamber }) {
     const { doctor } = chamber
@@ -31,8 +32,13 @@ export default function HospitalDoctor({ chamber }) {
                 </p>
             </div>
             <div className='w-[100px] h-[100px] mx-auto flex justify-center items-center rounded-full group-hover:bg-white'>
-                <img src={api_url + doctor?.user?.image?.url} alt="" className='w-[100px] h-[100px] rounded-full border-4' />
-
+                <Image
+                    src={api_url + doctor?.user?.image?.url} 
+                    height={100}
+                    width={100}
+                    alt="" 
+                    className='w-[100px] h-[100px] rounded-full border-4' 
+                />
             </div>
 
             <div

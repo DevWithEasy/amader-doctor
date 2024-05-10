@@ -3,6 +3,8 @@ import { useState } from "react"
 import { useParams,useRouter } from 'next/navigation'
 import useServiceStore from "@/app/_store/serviceStore"
 import useUserStore from "@/app/_store/userStore"
+import Heading from "../Heading"
+import Input from "../Input"
 
 export default function UpdateSpecialist() {
     const router = useRouter()

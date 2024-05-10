@@ -33,7 +33,7 @@ export default function AppointmentForm({ doctor }) {
     })
     useEffect(()=>{
         addChamber('')
-    },[])
+    },[addChamber])
     return (
         <div>
             <div className='w-full bg-white rounded-md'>

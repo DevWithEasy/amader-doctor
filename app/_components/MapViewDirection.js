@@ -69,7 +69,7 @@ const MapViewDirection = ({ view, setView, hospital }) => {
 
             mapRef.current = map
         }
-    }, []);
+    }, [hospital?.lat, hospital?.location, hospital?.long, hospital?.name]);
 
     return (
         <div
