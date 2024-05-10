@@ -31,7 +31,7 @@ export default function Appointments() {
 
     useEffect(() => {
         getAllAppointments()
-    }, [])
+    })
 
     return (
         <div className="w-full space-y-2">

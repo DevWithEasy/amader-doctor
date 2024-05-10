@@ -44,6 +44,7 @@ export default function Notification() {
                                 notificationFiltration(type, notifications)
                                     .map(notification =>
                                         <Link
+                                            key={notification._id}
                                             href={notification?.path}
                                             onClick={()=>seenNotification(notification._id,readSingleNotification)}
                                             className='block p-1 border rounded'

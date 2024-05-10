@@ -60,7 +60,7 @@ export default function Chambers() {
     }
     useEffect(() => {
         getAllChambers()
-    }, [random])
+    })
 
     return (
         <div

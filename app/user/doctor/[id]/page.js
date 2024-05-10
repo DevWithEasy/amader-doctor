@@ -43,7 +43,7 @@ export default function Doctor() {
       }
     }
     getDoctor()
-  }, [])
+  })
   
   return (
     <div
